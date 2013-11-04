@@ -1,6 +1,10 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.awt.image.BufferedImage;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,24 +29,16 @@ public class ImageLoaderTest
 	}
 
 	@Test
-	public void whenLoadingImageFromNotExistingFile_ShouldReturnEmptyArray() throws Exception
+	public void whenLoadingImageFromNotExistingFile_ShouldReturnNull() throws Exception
 	{
-		final double[] imageAsFlattenedArray = testObject.load(null);
-		assertEquals(0, imageAsFlattenedArray.length);
+		assertNull(testObject.load(null));
 	}
 
 	@Test
-	public void whenLoadingImageFromFile_ShouldReturnFlattenedRGBArray() throws Exception
+	public void whenLoadingImageFromFile_ShouldReturnBufferedImageObject() throws Exception
 	{
-		final double[] imageAsFlattenedArray = testObject.load("src/test/resources/black.png");
-		assertEquals(32 * 32 * 3, imageAsFlattenedArray.length);
-	}
-
-	@Test
-	public void whenLoadingBlackPicture_ShouldReturnOnlyZeroes() throws Exception
-	{
-		final double[] givenZeroesArray = new double[32 * 32 * 3]; // it's by default array of zeroes
-		final double[] imageAsFlattenedArray = testObject.load("src/test/resources/black.png");
-		assertArrayEquals(givenZeroesArray, imageAsFlattenedArray, 0.001);
+		BufferedImage bufferedImage = testObject.load("src/test/resources/black.png");
+		assertTrue(bufferedImage.getHeight()==32);
+		assertTrue(bufferedImage.getWidth()==32);
 	}
 }

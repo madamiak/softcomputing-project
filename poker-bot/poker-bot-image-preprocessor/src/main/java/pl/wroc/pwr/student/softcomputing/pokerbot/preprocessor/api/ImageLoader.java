@@ -1,5 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Provides image loading functionality.
  * 
@@ -15,8 +17,8 @@ public interface ImageLoader
 	 * 
 	 * @param pathToFile
 	 *          path to the given image.
-	 * @return image as flattened array of doubles.
+	 * @return image as BufferedImage object.
 	 */
-	double[] load(String pathToFile);
+	BufferedImage load(String pathToFile);
 
 }
