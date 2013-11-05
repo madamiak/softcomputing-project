@@ -3,9 +3,9 @@ package pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageToArray;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
 
-public class ImageToArrayConverter implements ImageToArray {
+public class ImageToArrayConverter implements ImageConverter {
 
 	@Override
 	public double[] convert(BufferedImage image) {

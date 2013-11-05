@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * @author RaV
  *
  */
-public interface ImageToArray {
+public interface ImageConverter {
 
 	
 	/**

@@ -10,7 +10,7 @@ import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.TableParser;
 public class TableParserImpl implements TableParser {
 	private BufferedImage table = null;
 	private ImageLoader imageLoader = new ImageFromFileLoader();
-	private ImageSplitter imageSplitter = new ImageFromFileSplitter();
+	private ImageSplitter imageSplitter = new ImageFromBufferedImageSplitter();
 
 	@Override
 	public void loadTable(String tableImageFile) {

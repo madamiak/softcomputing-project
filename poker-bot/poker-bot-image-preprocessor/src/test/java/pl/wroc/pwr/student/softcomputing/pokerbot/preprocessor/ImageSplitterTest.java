@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageSplitter;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromFileLoader;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromFileSplitter;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromBufferedImageSplitter;
 
 public class ImageSplitterTest
 {
@@ -18,7 +18,7 @@ public class ImageSplitterTest
 	@Before
 	public void setUp() throws Exception
 	{
-		testObject = new ImageFromFileSplitter();
+		testObject = new ImageFromBufferedImageSplitter();
 	}
 
 	@Test

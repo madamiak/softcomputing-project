@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageSaver;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromFileLoader;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromFileSplitter;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageToFileSaver;
 
 public class ImageSaverTest
