@@ -9,7 +9,7 @@ public class ImageFromFileSplitter implements ImageSplitter
 
 	public BufferedImage crop(BufferedImage image,  int coordinateX, int coordinateY, int height, int width)
 	{
-			return image.getSubimage(coordinateX, coordinateY, width, width);
+			return image.getSubimage(coordinateX, coordinateY, height, width);
 	}
 
 }
