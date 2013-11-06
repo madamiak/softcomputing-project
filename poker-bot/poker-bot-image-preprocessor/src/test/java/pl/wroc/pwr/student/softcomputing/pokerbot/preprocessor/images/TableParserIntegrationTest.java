@@ -69,4 +69,37 @@ public class TableParserIntegrationTest
 		}
 	}
 
+	@Test
+	public void shouldCropOutOpponentsCards()
+	{
+		for (int i = 1; i <= 5; i++)
+		{
+			testObject.loadTable("src/test/resources/Tournament/1.png");
+			BufferedImage img = testObject.parseOpponentCards(i);
+			new ImageToFileSaver().save(img, "target/Opponent" + i + "Cards.png");
+		}
+	}
+
+	@Test
+	public void shouldCropOutOpponentsBorder()
+	{
+		for (int i = 1; i <= 5; i++)
+		{
+			testObject.loadTable("src/test/resources/Tournament/1.png");
+			BufferedImage img = testObject.parseOpponentBorder(i);
+			new ImageToFileSaver().save(img, "target/Opponent" + i + "Border.png");
+		}
+	}
+
+	@Test
+	public void shouldCropOutOpponentsAppereance()
+	{
+		for (int i = 1; i <= 5; i++)
+		{
+			testObject.loadTable("src/test/resources/Tournament/1.png");
+			BufferedImage img = testObject.parseOpponentAppereanceAtTable(i);
+			new ImageToFileSaver().save(img, "target/Opponent" + i + "Appereance.png");
+		}
+	}
+
 }
