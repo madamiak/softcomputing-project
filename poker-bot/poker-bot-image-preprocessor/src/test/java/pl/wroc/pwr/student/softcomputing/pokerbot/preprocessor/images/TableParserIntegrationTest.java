@@ -70,6 +70,25 @@ public class TableParserIntegrationTest
 	}
 
 	@Test
+	public void shouldCropOutOpponentsChips()
+	{
+		for (int i = 1; i <= 5; i++)
+		{
+			testObject.loadTable("src/test/resources/Tournament/5.png");
+			BufferedImage img = testObject.parseOpponentChips(i);
+			new ImageToFileSaver().save(img, "target/Opponent" + i + "Chips.png");
+		}
+	}
+
+	@Test
+	public void shouldCropOutPlayerChips()
+	{
+		testObject.loadTable("src/test/resources/Tournament/5.png");
+		BufferedImage img = testObject.parsePlayerChips();
+		new ImageToFileSaver().save(img, "target/PlayerChips.png");
+	}
+
+	@Test
 	public void shouldCropOutOpponentsCards()
 	{
 		for (int i = 1; i <= 5; i++)

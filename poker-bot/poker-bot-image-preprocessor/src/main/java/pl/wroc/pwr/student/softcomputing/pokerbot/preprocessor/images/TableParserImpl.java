@@ -80,7 +80,30 @@ public class TableParserImpl implements TableParser {
 	public BufferedImage parseOpponentChips(int opponentNumber) {
 		throwExceptionIfTableNotLoaded();
 		throwExceptionIfInvalidOpponentNumberIsGiven(opponentNumber);
-		return null;
+		int x=0, y=0;
+		switch(opponentNumber){
+		case 1:
+			x=49;
+			y=353;
+			break;
+		case 2:
+			x=49;
+			y=164;
+			break;
+		case 3:
+			x=375;
+			y=91;
+			break;
+		case 4:
+			x=731;
+			y=164;
+			break;
+		case 5:
+			x=731;
+			y=353;
+			break;
+		}
+		return imageSplitter.crop(table, x, y, 94, 18);
 	}
 
 	@Override
@@ -93,7 +116,7 @@ public class TableParserImpl implements TableParser {
 	@Override
 	public BufferedImage parsePlayerChips() {
 		throwExceptionIfTableNotLoaded();
-		return null;
+		return imageSplitter.crop(table, 403, 458, 94, 18);
 	}
 
 	@Override
