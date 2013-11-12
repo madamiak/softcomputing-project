@@ -54,7 +54,6 @@ public class ChipsParserImpl implements ChipsParser {
 			if(!numberFound)noiseCount++;
 		}
 		chipCount=(int) (chipCount/Math.pow(10, noiseCount));
-		System.out.println(key);
 		return chipCount;
 	}
 	
@@ -81,7 +80,6 @@ public class ChipsParserImpl implements ChipsParser {
 			if(!numberFound)noiseCount++;
 		}
 		chipCount=(int) (chipCount/Math.pow(10, noiseCount));
-		System.out.println(key);
 		return chipCount;
 	}
 	
@@ -103,7 +101,6 @@ public class ChipsParserImpl implements ChipsParser {
 			if(a.charAt(i)==b.charAt(i))similar++;
 		}
 		similar=similar/a.length();
-		System.out.println("Similarity \""+a+"\" and \""+b+"\" is: "+similar);
 		if(similar>SIMILARITY) return true;
 		else return false;
 	}
