@@ -25,6 +25,16 @@ public interface ImageProcessor {
 	 * 		Input image converted to black and white.
 	 */
 	BufferedImage convertToBlackAndWhite(BufferedImage image);
+
+	/**
+	 * @param image
+	 * 		Image to be processed.
+	 * @param ratio
+	 * 		Ratio of output to input image size.
+	 * @return
+	 * 		Input image scaled according to ratio.
+	 */
+	BufferedImage scale(BufferedImage image, double ratio);
 	
 	
 }

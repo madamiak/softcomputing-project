@@ -1,6 +1,8 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageProcessor;
@@ -28,6 +30,19 @@ public class ImageProcessorImpl implements ImageProcessor {
          g.drawImage(image, 0, 0, null);
          g.dispose();
 		return bnw;
+	}
+
+	@Override
+	public BufferedImage scale(BufferedImage image, double ratio) {
+		int w = (int)(image.getWidth()*ratio);
+		int h = (int)(image.getHeight()*ratio);
+		BufferedImage after = new BufferedImage(w, h, image.getType());
+		AffineTransform at = new AffineTransform();
+		at.scale(ratio, ratio);
+		AffineTransformOp scaleOp = 
+				   new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		after = scaleOp.filter(image, after);
+		return after;
 	}
 
 }
