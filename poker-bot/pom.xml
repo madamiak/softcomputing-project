@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>poker-bot-image-preprocessor</module>
+  	<module>poker-bot-image-recognition-spike</module>
   </modules>
 </project>
