@@ -18,6 +18,11 @@ public class TableParserImpl implements TableParser {
 	}
 
 	@Override
+	public void loadTable(BufferedImage image) {
+		table = image;
+	}
+
+	@Override
 	public BufferedImage parseFoldButton() {
 		throwExceptionIfTableNotLoaded();
 		return imageSplitter.crop(table, 465, 555, 515 - 465, 580 - 555);

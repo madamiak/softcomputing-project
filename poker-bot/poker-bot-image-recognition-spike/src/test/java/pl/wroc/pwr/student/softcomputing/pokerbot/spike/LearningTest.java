@@ -1,5 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.spike;
 
+import static org.junit.Assert.*;
+
 import java.util.Arrays;
 
 import org.junit.Test;
