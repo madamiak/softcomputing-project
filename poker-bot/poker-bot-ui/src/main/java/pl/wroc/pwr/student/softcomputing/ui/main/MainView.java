@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.io.File;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -26,19 +27,22 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ChooseDirectoryListener;
+import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ChooseFileListener;
 import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ClickListListener;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.FilesListContainer;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasFilesList;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasImage;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTextValue;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.ImageCanvas;
 
 public class MainView implements MainDisplay {
 
 	private JFrame frame;
 	private ChooseDirectoryListener chooseDirectoryListener = new ChooseDirectoryListener();
+	private ChooseFileListener chooseFileListener = new ChooseFileListener();
 	private ClickListListener clickListListener = new ClickListListener();
 	private JTextField inputDirectoryPathField;
-	private JTextField textField;
+	private JTextField scaleField;
 	private JTextField outputFilePathField;
 	private JTabbedPane teachingTab;
 	private JPanel teachingTabPanel;
@@ -46,32 +50,51 @@ public class MainView implements MainDisplay {
 	private FilesListContainer listDataModel = new FilesListContainer();
 	private ImageCanvas imageCanvas = new ImageCanvas();
 	private JList<File> filesList;
+	private HasTextValue inputDirectory;
+	private HasTextValue outputFile;
 
 	public MainView() {
 		initialize();
 	}
 
+	@Override
 	public void setFrameVisible(boolean visible) {
 		frame.setVisible(visible);
 	}
 
+	@Override
 	public void setMainController(MainController mainController) {
 		chooseDirectoryListener.setController(mainController);
+		chooseFileListener.setController(mainController);
 		clickListListener.setController(mainController);
 	}
 
+	@Override
 	public HasFilesList getFilesList() {
 		return listDataModel;
 	}
 
+	@Override
 	public HasImage getImage() {
 		return imageCanvas;
 	}
-	
+
+	@Override
+	public HasTextValue getInputDirectory() {
+		return inputDirectory;
+	}
+
+	@Override
+	public HasTextValue getOutputFile() {
+		return outputFile;
+	}
+
+	@Override
 	public void refreshList() {
 		filesList.setListData(listDataModel);
 	}
 
+	@Override
 	public void refreshCanvas() {
 		imageCanvas.repaint();
 	}
@@ -169,6 +192,7 @@ public class MainView implements MainDisplay {
 
 	private void addInputDirectoryPathField(JPanel loadingFilesPanel) {
 		inputDirectoryPathField = new JTextField();
+		inputDirectory = new HasTextValue(inputDirectoryPathField);
 		loadingFilesPanel.add(inputDirectoryPathField);
 		inputDirectoryPathField.setColumns(10);
 	}
@@ -181,8 +205,9 @@ public class MainView implements MainDisplay {
 
 	private void addTeachingTypePanel() {
 		JPanel teachingTypePanel = setupTeachingTypePanel();
-		addFigureRadioButton(teachingTypePanel);
-		addSuitRadioButton(teachingTypePanel);
+		ButtonGroup teachingTypeButtonGroup = new ButtonGroup();
+		addFigureRadioButton(teachingTypePanel, teachingTypeButtonGroup);
+		addSuitRadioButton(teachingTypePanel, teachingTypeButtonGroup);
 	}
 
 	private JPanel setupTeachingTypePanel() {
@@ -199,16 +224,19 @@ public class MainView implements MainDisplay {
 		return teachingTypePanel;
 	}
 
-	private void addFigureRadioButton(JPanel teachingTypePanel) {
+	private void addFigureRadioButton(JPanel teachingTypePanel, ButtonGroup teachingTypeButtonGroup) {
 		JRadioButton figureRadioButton = new JRadioButton("Figures");
 		figureRadioButton.setBounds(18, 18, 109, 23);
+		figureRadioButton.setSelected(true);
 		teachingTypePanel.add(figureRadioButton);
+		teachingTypeButtonGroup.add(figureRadioButton);
 	}
 
-	private void addSuitRadioButton(JPanel teachingTypePanel) {
+	private void addSuitRadioButton(JPanel teachingTypePanel, ButtonGroup teachingTypeButtonGroup) {
 		JRadioButton suiteRadioButton = new JRadioButton("Suites");
 		suiteRadioButton.setBounds(18, 44, 109, 23);
 		teachingTypePanel.add(suiteRadioButton);
+		teachingTypeButtonGroup.add(suiteRadioButton);
 	}
 
 	private void addTeachingParametersPanel() {
@@ -240,10 +268,10 @@ public class MainView implements MainDisplay {
 	}
 
 	private void addScaleField(JPanel teachingParametersPanel) {
-		textField = new JTextField();
-		textField.setBounds(112, 22, 78, 20);
-		teachingParametersPanel.add(textField);
-		textField.setColumns(10);
+		scaleField = new JTextField();
+		scaleField.setBounds(112, 22, 78, 20);
+		teachingParametersPanel.add(scaleField);
+		scaleField.setColumns(10);
 	}
 
 	private void addBlackAndWhiteCheckBox(JPanel teachingParametersPanel) {
@@ -329,12 +357,14 @@ public class MainView implements MainDisplay {
 
 	private void addOutputFilePathField(JPanel savingFilePanel) {
 		outputFilePathField = new JTextField();
+		outputFile = new HasTextValue(outputFilePathField);
 		savingFilePanel.add(outputFilePathField);
 		outputFilePathField.setColumns(10);
 	}
 	
 	private void addBrowseFileButton(JPanel savingFilePanel) {
 		JButton browseOutputFileButton = new JButton("Browse");
+		browseOutputFileButton.addActionListener(chooseFileListener);
 		savingFilePanel.add(browseOutputFileButton);
 	}
 

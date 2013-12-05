@@ -2,6 +2,7 @@ package pl.wroc.pwr.student.softcomputing.ui.main;
 
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasFilesList;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasImage;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTextValue;
 
 public interface MainDisplay {
 
@@ -13,8 +14,14 @@ public interface MainDisplay {
 	
 	HasImage getImage();
 
+	HasTextValue getInputDirectory();
+	
+	HasTextValue getOutputFile();
+	
 	void refreshList();
 
 	void refreshCanvas();
+
+
 
 }

@@ -23,7 +23,7 @@ public class ChooseDirectoryListener implements ActionListener {
 		fileChooser.showOpenDialog(null);
 
 		if (fileChooser.getSelectedFile() != null) {
-			controller.onFileChosen(fileChooser.getSelectedFile());
+			controller.onDirectoryChosen(fileChooser.getSelectedFile());
 		}
 	}
 

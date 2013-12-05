@@ -9,8 +9,9 @@ public class MainController {
 	public MainController(MainDisplay mainDisplay) {
 		this.mainDisplay = mainDisplay;
 	}
-
-	public void onFileChosen(File file) {
+	
+	public void onDirectoryChosen(File file) {
+		mainDisplay.getInputDirectory().set(file.getAbsolutePath());
 		mainDisplay.getFilesList().clearContent();
 		
 		for (File each : file.listFiles()) {
@@ -19,6 +20,10 @@ public class MainController {
 			}
 		}
 		mainDisplay.refreshList();
+	}
+
+	public void onFileChosen(File file) {
+		mainDisplay.getOutputFile().set(file.getAbsolutePath());
 	}
 
 	private boolean isFileImageExtension(File each) {
