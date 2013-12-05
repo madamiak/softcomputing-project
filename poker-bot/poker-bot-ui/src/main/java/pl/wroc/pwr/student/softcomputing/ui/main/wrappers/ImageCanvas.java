@@ -25,7 +25,7 @@ public class ImageCanvas extends JPanel implements HasImage {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (image != null) {
-			g.drawImage(image.getScaledInstance(240, 150, Image.SCALE_DEFAULT), 0, 0, null);
+			g.drawImage(image.getScaledInstance(570, 379, Image.SCALE_DEFAULT), 0, 0, null);
 		}
 	}
 }

@@ -108,7 +108,7 @@ public class MainView implements MainDisplay {
 
 	private void createFrame() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 786, 525);
+		frame.setBounds(100, 100, 999, 664);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 	}
@@ -121,7 +121,7 @@ public class MainView implements MainDisplay {
 
 	private void createTab() {
 		teachingTab = new JTabbedPane(JTabbedPane.TOP);
-		teachingTab.setBounds(0, 0, 770, 466);
+		teachingTab.setBounds(0, 0, 983, 605);
 		frame.getContentPane().add(teachingTab);
 	}
 
@@ -141,9 +141,9 @@ public class MainView implements MainDisplay {
 		teachingTab.addTab("Teaching", null, teachingTabPanel, null);
 		teachingTab.setEnabledAt(0, true);
 		GridBagLayout gbl_teachingTabPanel = new GridBagLayout();
-		gbl_teachingTabPanel.columnWidths = new int[] {205, 156, 260, 30};
+		gbl_teachingTabPanel.columnWidths = new int[] {205, 120, 590};
 		gbl_teachingTabPanel.rowHeights = new int[]{0, 107, 0, 62, 0, 0, 58, 0};
-		gbl_teachingTabPanel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_teachingTabPanel.columnWeights = new double[]{0.0, 1.0, 0.0};
 		gbl_teachingTabPanel.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		teachingTabPanel.setLayout(gbl_teachingTabPanel);
 	}
@@ -267,8 +267,8 @@ public class MainView implements MainDisplay {
 		JPanel fileListPanel = new JPanel();
 		fileListPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Files", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_fileListPanel = new GridBagConstraints();
-		gbc_fileListPanel.gridheight = 7;
-		gbc_fileListPanel.insets = new Insets(0, 0, 0, 5);
+		gbc_fileListPanel.gridheight = 6;
+		gbc_fileListPanel.insets = new Insets(0, 0, 5, 5);
 		gbc_fileListPanel.fill = GridBagConstraints.BOTH;
 		gbc_fileListPanel.gridx = 1;
 		gbc_fileListPanel.gridy = 0;
@@ -294,7 +294,7 @@ public class MainView implements MainDisplay {
 		imagePreviewPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Preview", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		imagePreviewPanel.setLayout(null);
 		GridBagConstraints gbc_imagePreviewPanel = new GridBagConstraints();
-		gbc_imagePreviewPanel.gridheight = 3;
+		gbc_imagePreviewPanel.gridheight = 4;
 		gbc_imagePreviewPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_imagePreviewPanel.fill = GridBagConstraints.BOTH;
 		gbc_imagePreviewPanel.gridx = 2;
@@ -304,7 +304,7 @@ public class MainView implements MainDisplay {
 	}
 
 	private void addImagePanel(JPanel imagePreviewPanel) {
-		imageCanvas.setBounds(10, 39, 240, 150);
+		imageCanvas.setBounds(10, 11, 570, 379);
 		imagePreviewPanel.add(imageCanvas);
 	}
 
@@ -318,10 +318,10 @@ public class MainView implements MainDisplay {
 		JPanel savingFilePanel = new JPanel();
 		savingFilePanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Output file", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_savingFilePanel = new GridBagConstraints();
-		gbc_savingFilePanel.insets = new Insets(0, 0, 5, 0);
+		gbc_savingFilePanel.insets = new Insets(0, 0, 5, 5);
 		gbc_savingFilePanel.fill = GridBagConstraints.BOTH;
-		gbc_savingFilePanel.gridx = 2;
-		gbc_savingFilePanel.gridy = 3;
+		gbc_savingFilePanel.gridx = 1;
+		gbc_savingFilePanel.gridy = 6;
 		teachingTabPanel.add(savingFilePanel, gbc_savingFilePanel);
 		savingFilePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		return savingFilePanel;
