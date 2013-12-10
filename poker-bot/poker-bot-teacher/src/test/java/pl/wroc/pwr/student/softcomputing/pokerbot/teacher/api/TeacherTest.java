@@ -29,7 +29,7 @@ public class TeacherTest {
 		when(request.outputFile()).thenReturn("file.nnet");
 		testObject = new TeachingInteractor(request);
 
-		testObject.teach(toLearn);
+		testObject.teach(toLearn, null);
 
 		verify(neuralNetwork).learn(any(DataSet.class));
 	}
@@ -41,7 +41,7 @@ public class TeacherTest {
 		when(request.outputFile()).thenReturn("file.nnet");
 		testObject = new TeachingInteractor(request);
 
-		testObject.teach(toLearn);
+		testObject.teach(toLearn, null);
 
 		verify(neuralNetwork).save(anyString());
 	}

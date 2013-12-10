@@ -75,7 +75,8 @@ public class MainController {
 				.getTeachingType().isFigureSelected(), mainDisplay
 				.getTeachingType().isSuitSelected());
 		Teacher t = new TeachingInteractor(request);
-		t.teach(builder.prepareInput(teachingUnits));
+		double[] params = mainDisplay.getNetworkParameters().getAll();
+		t.teach(builder.prepareInput(teachingUnits), params );
 		mainDisplay.getProgress().setValue(100);
 	}
 

@@ -33,6 +33,7 @@ import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ClickTeachButtonListe
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.FilesListContainer;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasFilesList;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasImage;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasNetworkParameters;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasProgress;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTeachingParameters;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTeachingType;
@@ -60,6 +61,7 @@ public class MainView implements MainDisplay {
 	private HasTextValue outputFile;
 	private HasProgress progress;
 	private HasTeachingType teachingType;
+	private HasNetworkParameters networkParameters;
 
 	public MainView() {
 		initialize();
@@ -106,6 +108,11 @@ public class MainView implements MainDisplay {
 	@Override
 	public HasTeachingParameters getTeachingParameters() {
 		return teachingParameters;
+	}
+
+	@Override
+	public HasNetworkParameters getNetworkParameters() {
+		return networkParameters;
 	}
 
 	@Override
@@ -278,12 +285,30 @@ public class MainView implements MainDisplay {
 		JTextField scaleTextField = createScaleTextField();
 		JCheckBox blackAndWhiteCheckBox = createBlackAndWhiteCheckBox();
 		JCheckBox grayedScaleCheckBox = createGrayedScaleCheckBox();
+		JCheckBox maxIterationsCheckBox = createMaxIterationsCheckBox();
+		JTextField maxIterationsField = createMaxIterationsField();
+		JCheckBox learningRateCheckBox = createLearningRateCheckBox();
+		JTextField learningRateField = createLearningRateField();
+		JCheckBox errorRateCheckBox = createErrorRateCheckBox();
+		JTextField errorRateField = createMaxErrorRateField();
+		JCheckBox momentumCheckBox = createMomentumCheckBox();
+		JTextField momentumField = createMomentumField();
 		teachingParameters = new HasTeachingParameters(scaleCheckBox,
 				scaleTextField, blackAndWhiteCheckBox, grayedScaleCheckBox);
+		networkParameters = new HasNetworkParameters(maxIterationsField,
+				learningRateField, errorRateField, momentumField);
 		teachingParametersPanel.add(scaleCheckBox);
 		teachingParametersPanel.add(scaleTextField);
 		teachingParametersPanel.add(blackAndWhiteCheckBox);
 		teachingParametersPanel.add(grayedScaleCheckBox);
+		teachingParametersPanel.add(maxIterationsCheckBox);
+		teachingParametersPanel.add(maxIterationsField);
+		teachingParametersPanel.add(learningRateCheckBox);
+		teachingParametersPanel.add(learningRateField);
+		teachingParametersPanel.add(errorRateCheckBox);
+		teachingParametersPanel.add(errorRateField);
+		teachingParametersPanel.add(momentumCheckBox);
+		teachingParametersPanel.add(momentumField);
 	}
 
 	private JPanel setupTeachingParametersPanel() {
@@ -326,6 +351,58 @@ public class MainView implements MainDisplay {
 		JCheckBox chckbxGrayedScale = new JCheckBox("Grayed scale");
 		chckbxGrayedScale.setBounds(16, 73, 174, 23);
 		return chckbxGrayedScale;
+	}
+
+	private JCheckBox createMaxIterationsCheckBox() {
+		JCheckBox chckbxMaxIterations = new JCheckBox("Max iterations");
+		chckbxMaxIterations.setBounds(16, 99, 97, 23);
+		return chckbxMaxIterations;
+	}
+
+	private JCheckBox createLearningRateCheckBox() {
+		JCheckBox chckbxLearningRate = new JCheckBox("Learning rate");
+		chckbxLearningRate.setBounds(16, 125, 97, 23);
+		return chckbxLearningRate;
+	}
+
+	private JCheckBox createErrorRateCheckBox() {
+		JCheckBox chckbxErrorRate = new JCheckBox("Error rate");
+		chckbxErrorRate.setBounds(16, 151, 97, 23);
+		return chckbxErrorRate;
+	}
+
+	private JCheckBox createMomentumCheckBox() {
+		JCheckBox chckbxMomentum = new JCheckBox("Momentum");
+		chckbxMomentum.setBounds(16, 177, 97, 23);
+		return chckbxMomentum;
+	}
+
+	private JTextField createMaxIterationsField() {
+		JTextField textField_1 = new JTextField();
+		textField_1.setBounds(112, 100, 78, 20);
+		textField_1.setColumns(10);
+		return textField_1;
+	}
+
+	private JTextField createLearningRateField() {
+		JTextField textField_2 = new JTextField();
+		textField_2.setBounds(112, 126, 78, 20);
+		textField_2.setColumns(10);
+		return textField_2;
+	}
+
+	private JTextField createMaxErrorRateField() {
+		JTextField textField_3 = new JTextField();
+		textField_3.setBounds(112, 152, 78, 20);
+		textField_3.setColumns(10);
+		return textField_3;
+	}
+
+	private JTextField createMomentumField() {
+		JTextField textField_4 = new JTextField();
+		textField_4.setBounds(112, 178, 78, 20);
+		textField_4.setColumns(10);
+		return textField_4;
 	}
 
 	private void addFileListPanel() {

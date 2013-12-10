@@ -29,6 +29,10 @@ public class ToTest {
 	private JTextField inputDirectoryPathField;
 	private JTextField textField;
 	private JTextField outputFilePathField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -203,6 +207,42 @@ public class ToTest {
 		JCheckBox chckbxGrayedScale = new JCheckBox("Grayed scale");
 		chckbxGrayedScale.setBounds(16, 73, 174, 23);
 		teachingParametersPanel.add(chckbxGrayedScale);
+		
+		JCheckBox chckbxMaxIterations = new JCheckBox("Max iterations");
+		chckbxMaxIterations.setBounds(16, 99, 97, 23);
+		teachingParametersPanel.add(chckbxMaxIterations);
+		
+		JCheckBox chckbxLearningRate = new JCheckBox("Learning rate");
+		chckbxLearningRate.setBounds(16, 125, 97, 23);
+		teachingParametersPanel.add(chckbxLearningRate);
+		
+		JCheckBox chckbxErrorRate = new JCheckBox("Error rate");
+		chckbxErrorRate.setBounds(16, 151, 97, 23);
+		teachingParametersPanel.add(chckbxErrorRate);
+		
+		JCheckBox chckbxMomentum = new JCheckBox("Momentum");
+		chckbxMomentum.setBounds(16, 177, 97, 23);
+		teachingParametersPanel.add(chckbxMomentum);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(112, 100, 78, 20);
+		teachingParametersPanel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(112, 126, 78, 20);
+		teachingParametersPanel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(112, 152, 78, 20);
+		teachingParametersPanel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(112, 178, 78, 20);
+		teachingParametersPanel.add(textField_4);
+		textField_4.setColumns(10);
 		
 		JPanel savingFilePanel = new JPanel();
 		savingFilePanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Output file", TitledBorder.LEADING, TitledBorder.TOP, null, null));
