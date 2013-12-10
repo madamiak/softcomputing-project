@@ -1,6 +1,9 @@
 package pl.wroc.pwr.student.softcomputing.ui.main.wrappers;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Vector;
 
 public class FilesListContainer extends Vector<File> implements HasFilesList {
@@ -13,6 +16,16 @@ public class FilesListContainer extends Vector<File> implements HasFilesList {
 
 	public void clearContent() {
 		this.clear();
+	}
+
+	@Override
+	public List<File> getAll() {
+		List<File> files = new ArrayList<>();
+		Enumeration<File> elements = this.elements();
+		while (elements.hasMoreElements()) {
+			files.add(elements.nextElement());
+		}
+		return files;
 	}
 
 }

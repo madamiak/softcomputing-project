@@ -2,6 +2,9 @@ package pl.wroc.pwr.student.softcomputing.ui.main;
 
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasFilesList;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasImage;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasProgress;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTeachingParameters;
+import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTeachingType;
 import pl.wroc.pwr.student.softcomputing.ui.main.wrappers.HasTextValue;
 
 public interface MainDisplay {
@@ -18,10 +21,14 @@ public interface MainDisplay {
 	
 	HasTextValue getOutputFile();
 	
+	HasProgress getProgress();
+	
+	HasTeachingParameters getTeachingParameters();
+	
+	HasTeachingType getTeachingType();
+	
 	void refreshList();
 
 	void refreshCanvas();
-
-
 
 }

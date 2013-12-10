@@ -10,8 +10,12 @@ public class HasTextValue {
 		this.inputDirectoryPathField = inputDirectoryPathField;
 	}
 
-	public void set(String text) {
+	public void setValue(String text) {
 		inputDirectoryPathField.setText(text);
+	}
+
+	public String getValue() {
+		return inputDirectoryPathField.getText();
 	}
 
 }

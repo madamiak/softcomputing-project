@@ -1,8 +1,6 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.teacher.api;
 
-import org.neuroph.util.TransferFunctionType;
-
-import pl.wroc.pwr.student.softcomputing.pokerbot.teacher.implementation.TableElement;
+import org.neuroph.core.learning.DataSet;
 
 /**
  * Interface to teaching given Neural Network.
@@ -13,12 +11,11 @@ import pl.wroc.pwr.student.softcomputing.pokerbot.teacher.implementation.TableEl
 public interface Teacher {
 
 	/**
-	 * Starts learning process of neural network.
+	 * Starts learning process of neural network
+	 * 
+	 * @param toLearn data to learn
 	 */
-	void teach(TransferFunctionType type, TableElement tableElement,
-			boolean blackAndWhite, boolean grayed, double scalingRatio);
+	void teach(DataSet toLearn);
 
-	void recognize(String string, TableElement figure, String string2, boolean blackAndWhite, boolean grayed,
-			double scalingRatio);
 
 }
