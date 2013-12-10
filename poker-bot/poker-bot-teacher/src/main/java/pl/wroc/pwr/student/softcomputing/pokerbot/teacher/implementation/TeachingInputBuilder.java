@@ -1,5 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.teacher.implementation;
 
+import java.util.Arrays;
+
 import org.neuroph.core.learning.DataSet;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.teacher.api.InputBuilder;
@@ -22,6 +24,7 @@ public class TeachingInputBuilder implements InputBuilder {
 		for (TeachingUnitDTO teachingUnit : toLearn.list()) {
 			double[] input = teachingUnit.image();
 			double[] output = createOutput(teachingUnit.name());
+//			System.out.println(Arrays.toString(output));
 			dataSet.addRow(input, output);
 		}
 		return dataSet;
@@ -53,13 +56,14 @@ public class TeachingInputBuilder implements InputBuilder {
 	}
 
 	private double[] createSuitOutput(String name) {
-		if("H".equals(name)) {
+		System.out.println(name);
+		if("h".equals(name)) {
 			return new double[] {0.0, 0.0};
-		} else if("D".equals(name)) {
+		} else if("d".equals(name)) {
 			return new double[] {0.0, 1.0};
-		} else if("S".equals(name)) {
+		} else if("s".equals(name)) {
 			return new double[] {1.0, 0.0};
-		} else if("B".equals(name)) {
+		} else if("c".equals(name)) {
 			return new double[] {1.0, 1.0};
 		} else {
 			return null;

@@ -33,6 +33,7 @@ public class ToTest {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
@@ -263,5 +264,23 @@ public class ToTest {
 		
 		JPanel recognizingTabPanel = new JPanel();
 		teachingTab.addTab("Recognizing", null, recognizingTabPanel, null);
+		recognizingTabPanel.setLayout(null);
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(10, 11, 89, 23);
+		recognizingTabPanel.add(btnBrowse);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 45, 560, 350);
+		recognizingTabPanel.add(panel);
+		
+		JButton btnRecognize = new JButton("Recognize");
+		btnRecognize.setBounds(10, 406, 89, 23);
+		recognizingTabPanel.add(btnRecognize);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(10, 440, 86, 20);
+		recognizingTabPanel.add(textField_5);
+		textField_5.setColumns(10);
 	}
 }

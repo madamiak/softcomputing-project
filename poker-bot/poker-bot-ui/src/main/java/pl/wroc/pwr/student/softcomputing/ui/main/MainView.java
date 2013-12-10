@@ -5,11 +5,17 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -26,6 +32,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import org.neuroph.core.NeuralNetwork;
+import org.neuroph.imgrec.ImageRecognitionPlugin;
+
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageProcessor;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.TableParser;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageProcessorImpl;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageToArrayConverter;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.TableParserImpl;
 import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ChooseDirectoryListener;
 import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ChooseFileListener;
 import pl.wroc.pwr.student.softcomputing.ui.main.listeners.ClickListListener;
@@ -62,6 +77,9 @@ public class MainView implements MainDisplay {
 	private HasProgress progress;
 	private HasTeachingType teachingType;
 	private HasNetworkParameters networkParameters;
+	private JTextField textField_5;
+	private File nnetFile;
+	private File image;
 
 	public MainView() {
 		initialize();
@@ -552,6 +570,158 @@ public class MainView implements MainDisplay {
 	private void createRecognizingTabPanel() {
 		recognizingTabPanel = new JPanel();
 		teachingTab.addTab("Recognizing", null, recognizingTabPanel, null);
+		recognizingTabPanel.setLayout(null);
+
+		final ImageCanvas panel = new ImageCanvas();
+		panel.setBounds(10, 45, 560, 350);
+		recognizingTabPanel.add(panel);
+
+		JButton btnBrowse = new JButton("Browse image");
+		btnBrowse.setBounds(10, 11, 150, 23);
+		btnBrowse.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setApproveButtonText("Choose");
+				fileChooser.setDialogTitle("Choose file to recognize");
+				fileChooser.setCurrentDirectory(new File(".."));
+				fileChooser.showOpenDialog(null);
+				image = fileChooser.getSelectedFile();
+				panel.set(image);
+				panel.repaint();
+			}
+		});
+		recognizingTabPanel.add(btnBrowse);
+
+		JButton btnNnet = new JButton("Browse data source");
+		btnNnet.setBounds(170, 11, 150, 23);
+		btnNnet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setApproveButtonText("Choose");
+				fileChooser.setDialogTitle("Choose file to recognize");
+				fileChooser.setCurrentDirectory(new File(".."));
+				fileChooser.showOpenDialog(null);
+				nnetFile = fileChooser.getSelectedFile();
+			}
+		});
+		recognizingTabPanel.add(btnNnet);
+
+		JButton btnRecognize = new JButton("Recognize");
+		btnRecognize.setBounds(10, 406, 100, 23);
+		btnRecognize.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NeuralNetwork nnet = NeuralNetwork.load(nnetFile
+						.getAbsolutePath());
+				TableParser parser = new TableParserImpl();
+				parser.loadTable(image.getAbsolutePath());
+				String[] params = nnetFile.getName().substring(0, nnetFile.getName().indexOf(".")).split("-");
+				String teachingtype = params[0];
+				String scale = params[1];
+				String bnw = params[2];
+				String g = params[3];
+				System.out.println(teachingtype+scale+bnw+g);
+				if (teachingtype.equals("f")) {
+					BufferedImage card1 = parser.parseFirstCard();
+					recognize(nnet, prepareInput(card1, bnw.equals("y"), g.equals("y"),
+							Double.parseDouble("0." + scale)));
+					BufferedImage card2 = parser.parseSecondCard();
+					recognize(nnet, prepareInput(card2, bnw.equals("y"), g.equals("y"),
+							Double.parseDouble("0." + scale)));
+				} else if (teachingtype.equals("s")) {
+					BufferedImage suit1 = parser.parseFirstSuit();
+                    recognize(nnet, prepareInput(suit1, bnw.equals("y"), g.equals("y"),
+                    		Double.parseDouble("0." + scale)));
+                    BufferedImage suit2 = parser.parseSecondSuit();
+                    recognize(nnet, prepareInput(suit2, bnw.equals("y"), g.equals("y"),
+                    		Double.parseDouble("0." + scale)));
+				}
+			}
+		});
+		recognizingTabPanel.add(btnRecognize);
+
+		textField_5 = new JTextField();
+		textField_5.setBounds(10, 440, 86, 20);
+		recognizingTabPanel.add(textField_5);
+		textField_5.setColumns(10);
+	}
+
+	private double[] prepareInput(BufferedImage image, boolean blackAndWhite,
+			boolean grayed, double scalingRatio) {
+		final ImageProcessor processor = new ImageProcessorImpl();
+		image = processor.scale(image, scalingRatio);
+		if (blackAndWhite) {
+			image = processor.convertToBlackAndWhite(image);
+		}
+		if (grayed) {
+			image = processor.convertToGrayscale(image);
+		}
+		final ImageConverter converter = new ImageToArrayConverter();
+		return converter.convert(image);
+	}
+
+	private void recognize(NeuralNetwork loadedMlPerceptron, double[] input) {
+		loadedMlPerceptron.setInput(input);
+		loadedMlPerceptron.calculate();
+		double[] networkOutput = loadedMlPerceptron.getOutput();
+		System.out.println(String.format("Output: %s\tInput: %s",
+				convertOutput(networkOutput), Arrays.toString(input)));
+		textField_5.setText(textField_5.getText() + convertOutput(networkOutput));
+		
+	}
+
+	private String convertOutput(double[] output) {
+		String out = "";
+		for (double d : output) {
+			if (d > 0.5) {
+				out += "1";
+			} else {
+				out += "0";
+			}
+		}
+		switch (out) {
+		case "0000":
+			return "2";
+		case "0001":
+			return "3";
+		case "0010":
+			return "4";
+		case "0011":
+			return "5";
+		case "0100":
+			return "6";
+		case "0101":
+			return "7";
+		case "0110":
+			return "8";
+		case "0111":
+			return "9";
+		case "1000":
+			return "T";
+		case "1001":
+			return "J";
+		case "1010":
+			return "Q";
+		case "1011":
+			return "K";
+		case "1100":
+			return "A";
+		case "00":
+			return "h";
+		case "01":
+			return "s";
+		case "10":
+			return "d";
+		case "11":
+			return "c";
+		}
+
+		return null;
 	}
 
 }

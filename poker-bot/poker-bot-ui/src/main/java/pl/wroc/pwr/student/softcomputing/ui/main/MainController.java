@@ -108,7 +108,7 @@ public class MainController {
 		BufferedImage secondSuit = parser.parseSecondSuit();
 		secondSuit = convert(processor, secondSuit);
 		teachingUnits.add(new TeachingUnitDTO(converter.convert(secondSuit),
-				file.getName().substring(3)));
+				file.getName().substring(3,4)));
 	}
 
 	private void processFigures(TeachingUnitsDTO teachingUnits,
