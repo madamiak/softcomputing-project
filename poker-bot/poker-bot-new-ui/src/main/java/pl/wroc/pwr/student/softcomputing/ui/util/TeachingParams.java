@@ -4,13 +4,13 @@ package pl.wroc.pwr.student.softcomputing.ui.util;
  * Created by RaV on 05.01.14.
  */
 public class TeachingParams {
-    private float scale;
+    private double scale=1;
     private boolean blackAndWhite=false;
     private boolean grayscale =false;
     private int maxIterations;
-    private float learningRate;
-    private float errorRate;
-    private float momentum;
+    private double learningRate;
+    private double errorRate;
+    private double momentum;
 
     public String toNamePostfix() {
         return "-"+parse(scale)
@@ -38,8 +38,8 @@ public class TeachingParams {
             else
                 return "";
         }
-        if(element instanceof  Float){
-            if((Float)element <= 0)
+        if(element instanceof  Double){
+            if((double)element <= 0)
                 return "";
         }
         if(element instanceof  Integer){
@@ -49,20 +49,20 @@ public class TeachingParams {
         return element.toString().replaceAll("\\.",",");
     }
 
-    public float getLearningRate() {
+    public double getLearningRate() {
         return learningRate;
     }
 
-    public void setLearningRate(float learningRate) {
+    public void setLearningRate(double learningRate) {
         if(learningRate<=0)throw new UnsupportedOperationException();
         this.learningRate = learningRate;
     }
 
-    public float getScale() {
+    public double getScale() {
         return scale;
     }
 
-    public void setScale(float scale) {
+    public void setScale(double scale) {
         if(scale<=0)throw new UnsupportedOperationException();
         this.scale = scale;
     }
@@ -92,20 +92,20 @@ public class TeachingParams {
         this.maxIterations = maxIterations;
     }
 
-    public float getErrorRate() {
+    public double getErrorRate() {
         return errorRate;
     }
 
-    public void setErrorRate(float errorRate) {
+    public void setErrorRate(double errorRate) {
         if(errorRate<=0)throw new UnsupportedOperationException();
         this.errorRate = errorRate;
     }
 
-    public float getMomentum() {
+    public double getMomentum() {
         return momentum;
     }
 
-    public void setMomentum(float momentum) {
+    public void setMomentum(double momentum) {
         if(momentum<=0)throw new UnsupportedOperationException();
         this.momentum = momentum;
     }

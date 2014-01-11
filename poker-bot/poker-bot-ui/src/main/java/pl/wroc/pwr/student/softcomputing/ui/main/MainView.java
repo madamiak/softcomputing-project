@@ -626,6 +626,7 @@ public class MainView implements MainDisplay {
 				String bnw = params[2];
 				String g = params[3];
 				System.out.println(teachingtype+scale+bnw+g);
+				textField_5.setText("");
 				if (teachingtype.equals("f")) {
 					BufferedImage card1 = parser.parseFirstCard();
 					recognize(nnet, prepareInput(card1, bnw.equals("y"), g.equals("y"),

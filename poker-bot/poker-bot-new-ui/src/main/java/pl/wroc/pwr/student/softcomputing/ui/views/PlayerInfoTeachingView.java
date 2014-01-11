@@ -100,10 +100,10 @@ public class PlayerInfoTeachingView {
 
         figuresTeachButton.addActionListener(new TeachCardsActionListener(figuresScaleCheckBox,figuresScaleTextField, figuresBNWCheckBox,
                 figuresGrayscaleCheckBox, figuresMaxIterCheckBox, figuresMaxIterTextField, figuresLearningRateCheckBox, figuresLearningRateTextField,
-                figuresErrorRateCheckBox, figuresErrorRateTextField, figuresMomentumCheckBox, figuresMomentumTextField, figuresOutputFilename, figuresOutputDir, figuresImageFilesList));
+                figuresErrorRateCheckBox, figuresErrorRateTextField, figuresMomentumCheckBox, figuresMomentumTextField, figuresOutputFilename, figuresOutputDir, figuresImageFilesList,"figure"));
         suitsTeachButton.addActionListener(new TeachCardsActionListener(suitsScaleCheckBox,suitsScaleTextField, suitsBNWCheckBox,
                 suitsGrayscaleCheckBox, suitsMaxIterCheckBox, suitsMaxIterTextField, suitsLearningRateCheckBox, suitsLearningRateTextField,
-                suitsErrorRateCheckBox, suitsErrorRateTextField, suitsMomentumCheckBox, suitsMomentumTextField, suitsOutputFilename, suitsOutputDir, suitsImageFilesList));
+                suitsErrorRateCheckBox, suitsErrorRateTextField, suitsMomentumCheckBox, suitsMomentumTextField, suitsOutputFilename, suitsOutputDir, suitsImageFilesList,"suit"));
     }
 
     private void createUIComponents() {

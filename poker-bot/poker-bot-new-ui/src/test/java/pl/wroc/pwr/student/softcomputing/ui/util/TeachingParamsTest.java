@@ -17,28 +17,28 @@ public class TeachingParamsTest {
     }
     @Test
     public void testToStringWhenEmpty() throws Exception {
-        assertTrue(teachingParams.toNamePostfix().equals("---"));
+        assertTrue(teachingParams.toNamePostfix().equals("-1,0--"));
     }
     @Test
     public void testToStringWhenPartiallyEmpty() throws Exception {
         teachingParams.setBlackAndWhite(true);
         teachingParams.setMaxIterations(10);
-        teachingParams.setErrorRate(0.32f);
-        assertTrue(teachingParams.toNamePostfix().equals("--t-"));
+        teachingParams.setErrorRate(0.32);
+        assertTrue(teachingParams.toNamePostfix().equals("-1,0-t-"));
     }
     public void testToStringWhenPartiallyEmpty2() throws Exception {
         teachingParams.setGrayscale(true);
-        teachingParams.setScale(0.32f);
+        teachingParams.setScale(0.32);
         assertTrue(teachingParams.toNamePostfix().equals("-0,32--t"));
     }
     public void testToStringWhenFilled() throws Exception {
-        teachingParams.setScale(0.5f);
+        teachingParams.setScale(0.5);
         teachingParams.setBlackAndWhite(false);
         teachingParams.setGrayscale(true);
         teachingParams.setMaxIterations(1000);
-        teachingParams.setLearningRate(0.8f);
-        teachingParams.setErrorRate(0.2f);
-        teachingParams.setMomentum(0.6f);
+        teachingParams.setLearningRate(0.8);
+        teachingParams.setErrorRate(0.2);
+        teachingParams.setMomentum(0.6);
         assertTrue(teachingParams.toNamePostfix().equals("-0,5--t"));
     }
 }

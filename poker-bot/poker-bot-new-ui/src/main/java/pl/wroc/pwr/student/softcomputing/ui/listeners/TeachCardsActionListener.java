@@ -1,6 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.ui.listeners;
 
 import pl.wroc.pwr.student.softcomputing.ui.util.FileHolder;
+import pl.wroc.pwr.student.softcomputing.ui.util.TeachingDelegate;
 import pl.wroc.pwr.student.softcomputing.ui.util.TeachingParams;
 
 import javax.swing.*;
@@ -29,8 +30,9 @@ public class TeachCardsActionListener implements ActionListener {
     private JTextField filenameT;
     private FileHolder fileDir;
     private List<File> imageFilesList;
+    private String teacherType;
 
-    public TeachCardsActionListener(JCheckBox scaleC, JTextField scaleT, JCheckBox blackAndWhiteC, JCheckBox grayscaleC, JCheckBox maxIterC, JTextField maxIterT, JCheckBox learningRateC, JTextField learningRateT, JCheckBox errorRateC, JTextField errorRateT, JCheckBox momentumC, JTextField momentumT, JTextField filenameT, FileHolder fileDir, List<File> imageFilesList) {
+    public TeachCardsActionListener(JCheckBox scaleC, JTextField scaleT, JCheckBox blackAndWhiteC, JCheckBox grayscaleC, JCheckBox maxIterC, JTextField maxIterT, JCheckBox learningRateC, JTextField learningRateT, JCheckBox errorRateC, JTextField errorRateT, JCheckBox momentumC, JTextField momentumT, JTextField filenameT, FileHolder fileDir, List<File> imageFilesList, String teacherType) {
         this.scaleC = scaleC;
         this.scaleT = scaleT;
         this.blackAndWhiteC = blackAndWhiteC;
@@ -46,6 +48,7 @@ public class TeachCardsActionListener implements ActionListener {
         this.filenameT = filenameT;
         this.fileDir = fileDir;
         this.imageFilesList = imageFilesList;
+        this.teacherType = teacherType;
     }
 
     @Override
@@ -72,6 +75,13 @@ public class TeachCardsActionListener implements ActionListener {
             return;
         }
         String file = fileDir.getFile()+File.separator+filename+getTeachingParams().toNamePostfix()+".nnet";
+        try {
+            TeachingDelegate.teach(imageFilesList,teacherType,file,getTeachingParams());
+        } catch (InstantiationException e1) {
+            displayMessage("Error while creating teacher appeared");
+        }catch (RuntimeException e1){
+            displayMessage("Something went wrong:\n"+e1);
+        }
         System.out.println(file);
     }
 
@@ -90,7 +100,7 @@ public class TeachCardsActionListener implements ActionListener {
     private TeachingParams getTeachingParams(){
         TeachingParams teachingParams = new TeachingParams();
         if(scaleC.isSelected())
-            teachingParams.setScale(Float.parseFloat(scaleT.getText()));
+            teachingParams.setScale(Double.parseDouble(scaleT.getText()));
         if(blackAndWhiteC.isSelected())
             teachingParams.setBlackAndWhite(true);
         if(grayscaleC.isSelected())
@@ -98,12 +108,11 @@ public class TeachCardsActionListener implements ActionListener {
         if(maxIterC.isSelected())
             teachingParams.setMaxIterations(Integer.parseInt(maxIterT.getText()));
         if(learningRateC.isSelected())
-            teachingParams.setScale(Float.parseFloat(learningRateT.getText()));
+            teachingParams.setLearningRate(Double.parseDouble(learningRateT.getText()));
         if(errorRateC.isSelected())
-            teachingParams.setScale(Float.parseFloat(errorRateT.getText()));
+            teachingParams.setErrorRate(Double.parseDouble(errorRateT.getText()));
         if(momentumC.isSelected())
-            teachingParams.setScale(Float.parseFloat(momentumT.getText()));
-
+            teachingParams.setMomentum(Double.parseDouble(momentumT.getText()));
         return  teachingParams;
     }
 

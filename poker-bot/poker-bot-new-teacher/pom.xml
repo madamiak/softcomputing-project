@@ -19,11 +19,6 @@
 		<!-- POKERBOT -->
 		<dependency>
 			<groupId>pl.wroc.pwr.student.softcomputing</groupId>
-			<artifactId>poker-bot-teacher-interface</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>pl.wroc.pwr.student.softcomputing</groupId>
 			<artifactId>poker-bot-image-preprocessor</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>

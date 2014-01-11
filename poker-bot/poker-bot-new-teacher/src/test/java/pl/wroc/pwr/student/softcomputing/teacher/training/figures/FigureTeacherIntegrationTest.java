@@ -28,7 +28,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.training.PokerBotTeacherFactory
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 
 public class FigureTeacherIntegrationTest {
-	private static final String IMAGE_DIR = "C:\\Users\\VIRTUAL7\\Documents\\GitHub\\softcomputing-project\\poker-bot\\poker-bot-new-teacher\\src\\test\\resources\\FiguresAndSuits\\";
+	private static final String IMAGE_DIR = ".\\src\\test\\resources\\FiguresAndSuits\\";
 	private Teacher figureTeacher;
 	private Images images;
 	private LearningConfig learningConfig;
@@ -42,7 +42,7 @@ public class FigureTeacherIntegrationTest {
 		ImagesBuilder<BufferedImage, List<File>> imagesBuilder = new FigureImagesBuilder(tableParser , imageProcessor);
 		List<File> listOfImages = new ArrayList<>();
 		File imageDir = new File(IMAGE_DIR);
-		for (final File fileEntry : imageDir.listFiles()) {
+        for (final File fileEntry : imageDir.listFiles()) {
 			if(fileEntry.getName().contains("png"))
 				listOfImages.add(fileEntry);
 	    }
