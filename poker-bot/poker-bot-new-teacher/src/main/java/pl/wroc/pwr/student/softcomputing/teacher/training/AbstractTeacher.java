@@ -51,28 +51,32 @@ public abstract class AbstractTeacher implements Teacher {
 	@Override
 	public void setLearningConfig(LearningConfig learningConfig) {
 		validate(learningConfig);
-		MomentumBackpropagation rule = new MomentumBackpropagation();
-		rule.setMaxIterations(learningConfig.maxIterations());
-		rule.setLearningRate(learningConfig.learningRate());
-		rule.setMaxError(learningConfig.errorRate());
-		rule.setMomentum(learningConfig.momentum());
-		this.learningRule = rule;
+		setupLearnigRule(learningConfig);
 		System.out.println("Configured neural network to: iterations -> " + learningConfig.maxIterations() 
 				+ ", learning rate -> " + learningConfig.learningRate() + ", maximum error -> "
 				+ learningConfig.errorRate() + ", momentum -> " + learningConfig.momentum());
 		this.outputName = learningConfig.outputName();
 	}
 
+	private void setupLearnigRule(LearningConfig learningConfig) {
+		MomentumBackpropagation rule = new MomentumBackpropagation();
+		if(learningConfig.maxIterations() != 0) rule.setMaxIterations(learningConfig.maxIterations());
+		if(learningConfig.learningRate() != 0) rule.setLearningRate(learningConfig.learningRate());
+		if(learningConfig.errorRate() != 0) rule.setMaxError(learningConfig.errorRate());
+		if(learningConfig.momentum() != 0) rule.setMomentum(learningConfig.momentum());
+		this.learningRule = rule;
+	}
+
 	protected void validate(LearningConfig learningConfig) {
 		if (learningConfig.maxIterations() < 1)
 			throw new IllegalArgumentException();
-		if (learningConfig.learningRate() <= 0.0
+		if (learningConfig.learningRate() < 0.0
 				|| learningConfig.learningRate() > 1.0)
 			throw new IllegalArgumentException();
-		if (learningConfig.errorRate() <= 0.0
+		if (learningConfig.errorRate() < 0.0
 				|| learningConfig.errorRate() > 1.0)
 			throw new IllegalArgumentException();
-		if (learningConfig.momentum() <= 0.0 || learningConfig.momentum() > 1.0)
+		if (learningConfig.momentum() < 0.0 || learningConfig.momentum() > 1.0)
 			throw new IllegalArgumentException();
 		if (learningConfig.outputName() == null
 				|| learningConfig.outputName().equals(""))

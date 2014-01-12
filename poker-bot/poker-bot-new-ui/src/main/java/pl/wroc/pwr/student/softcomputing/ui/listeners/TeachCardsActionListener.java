@@ -61,9 +61,9 @@ public class TeachCardsActionListener implements ActionListener {
             TeachingParams teachingParams = getTeachingParams();
             System.out.println(teachingParams + "postfix: "+teachingParams.toNamePostfix());
         }catch(NumberFormatException ex){
-            displayMessage("One or more fields is filled with wrong value.");
+            displayMessage("One or more fields is filled with wrong value.", ex);
         }catch (UnsupportedOperationException ex){
-            displayMessage("Fields cannot be filled with 0 or negative value.");
+            displayMessage("Fields cannot be filled with 0 or negative value.", ex);
         }
         if(fileDir.getFile()==null){
             displayMessage("Output directory not selected.");
@@ -78,9 +78,9 @@ public class TeachCardsActionListener implements ActionListener {
         try {
             TeachingDelegate.teach(imageFilesList,teacherType,file,getTeachingParams());
         } catch (InstantiationException e1) {
-            displayMessage("Error while creating teacher appeared");
+            displayMessage("Error while creating teacher appeared", e1);
         }catch (RuntimeException e1){
-            displayMessage("Something went wrong:\n"+e1);
+            displayMessage("Something went wrong:\n"+e1, e1);
         }
         System.out.println(file);
     }
@@ -118,5 +118,10 @@ public class TeachCardsActionListener implements ActionListener {
 
     private void displayMessage(String message){
         JOptionPane.showMessageDialog(null,message);
+    }
+
+    private void displayMessage(String message, Throwable cause){
+    	cause.printStackTrace();
+    	displayMessage(message);
     }
 }

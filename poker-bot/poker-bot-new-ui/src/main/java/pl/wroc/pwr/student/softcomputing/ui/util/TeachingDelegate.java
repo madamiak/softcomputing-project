@@ -30,7 +30,7 @@ public class TeachingDelegate {
         ImageProcessor imageProcessor = new ImageProcessorImpl();
         TableParser tableParser = new TableParserImpl();
         ImagesBuilder<BufferedImage, List<File>> imagesBuilder = new FigureImagesBuilder(tableParser , imageProcessor);
-        ImageConfig imageConfig = new TrainingImageConfig(teachingParams.getScale(), teachingParams.isBlackAndWhite(), teachingParams.isGrayscale(), null);
+        ImageConfig imageConfig = new TrainingImageConfig(teachingParams.getScale(), teachingParams.isBlackAndWhite(), teachingParams.isGrayscale());
         Images images = imagesBuilder.buildFrom(listOfImages, imageConfig);
         LearningConfig learningConfig = new NeuralNetworkConfig(teachingParams.getMaxIterations(), teachingParams.getLearningRate(), teachingParams.getErrorRate(), teachingParams.getMomentum(), outputFile);
         figureTeacher.setLearningConfig(learningConfig);
