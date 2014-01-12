@@ -26,17 +26,21 @@ public class SuitTeacher extends AbstractTeacher {
 		DataSet trainingSet = createTrainingSet(images, 2);
 		NeuralNetwork neuralNetwork = createNeuralNetwork(trainingSet);
 		neuralNetwork.learn(trainingSet);
+		neuralNetwork.save(outputName);
 	}
 	
 	@Override
 	protected DataSet createTrainingSet(Images images, int outputSize) {
 		int inputSize = imageConverter.convert(((TrainingImages) images).list()
 				.get(0).getData()).length;
+		System.out.println("Training set parameters: input -> " + inputSize + ", output -> " + outputSize);
+		System.out.println("Creating training set...");
 		DataSet trainingSet = new DataSet(inputSize, outputSize);
 		for (Image<BufferedImage> i : ((TrainingImages) images).list()) {
 			trainingSet.addRow(imageConverter.convert(i.getData()),
 					outputConverter.convert(i.getName()));
 		}
+		System.out.println("Created training set size " + ((TrainingImages) images).list().size());
 		return trainingSet;
 	}
 
