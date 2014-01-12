@@ -30,15 +30,15 @@ public class FigureTeacherTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThrowExceptionWhenMaxIterationsValueIsNotPositive()
+	public void shouldThrowExceptionWhenMaxIterationsValueIsNegative()
 			throws Exception {
-		setLearningConfig(0, 0.2, 0.05, 0.7, "asd.nnet");
+		setLearningConfig(-1, 0.2, 0.05, 0.7, "asd.nnet");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThrowExceptionWhenLearningRateIsNotPositive()
+	public void shouldThrowExceptionWhenLearningRateIsNegative()
 			throws Exception {
-		setLearningConfig(100, 0, 0.1, 0.7, "asd.nnet");
+		setLearningConfig(100, -1.0, 0.1, 0.7, "asd.nnet");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -48,9 +48,9 @@ public class FigureTeacherTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThrowExceptionWhenErrorRateIsNotPositive()
+	public void shouldThrowExceptionWhenErrorRateIsNegative()
 			throws Exception {
-		setLearningConfig(100, 0.1, 0.0, 0.7, "asd.nnet");
+		setLearningConfig(100, 0.1, -1.0, 0.7, "asd.nnet");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -60,9 +60,9 @@ public class FigureTeacherTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThrowExceptionWhenMomentumIsNotPositive()
+	public void shouldThrowExceptionWhenMomentumIsNegative()
 			throws Exception {
-		setLearningConfig(100, 0.1, 0.1, 0.0, "asd.nnet");
+		setLearningConfig(100, 0.1, 0.1, -1.0, "asd.nnet");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
