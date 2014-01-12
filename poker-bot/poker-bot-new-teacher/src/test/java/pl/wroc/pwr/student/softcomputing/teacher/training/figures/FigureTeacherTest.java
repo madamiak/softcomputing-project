@@ -1,6 +1,5 @@
 package pl.wroc.pwr.student.softcomputing.teacher.training.figures;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.awt.image.BufferedImage;
@@ -10,16 +9,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.learning.DataSet;
-import org.neuroph.core.learning.LearningRule;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Teacher;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.LearningConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.training.NeuralNetworkConfig;
-import pl.wroc.pwr.student.softcomputing.teacher.training.OutputConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImage;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImages;
 
@@ -84,7 +79,7 @@ public class FigureTeacherTest {
 	@Test
 	public void shouldDelegateTeachingProcessToNeuralNetwork() throws Exception {
 		setLearningConfig(100, 0.1, 0.1, 0.7, "asd.nnet");
-		Images<BufferedImage> images = new FigureImages();
+		Images<BufferedImage> images = new TrainingImages();
 		TrainingImage image = mock(TrainingImage.class);
 		BufferedImage bufferedImage = mock(BufferedImage.class);
 		double[] array = new double[] {};

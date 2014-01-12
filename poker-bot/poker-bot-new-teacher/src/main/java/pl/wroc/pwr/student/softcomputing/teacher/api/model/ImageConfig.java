@@ -29,11 +29,5 @@ public interface ImageConfig {
 	 * @return true when image is in grayscale.
 	 */
 	boolean isGrayscale();
-
-	/**
-	 * Returns name of the image.
-	 * 
-	 * @return name of the image.
-	 */
-	String getName();
+	
 }

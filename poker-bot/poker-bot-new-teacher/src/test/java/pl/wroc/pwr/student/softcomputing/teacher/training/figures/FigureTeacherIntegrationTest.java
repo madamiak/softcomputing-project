@@ -6,17 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageLoader;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageProcessor;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.TableParser;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageFromFileLoader;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageProcessorImpl;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.TableParserImpl;
-import pl.wroc.pwr.student.softcomputing.teacher.api.ImageBuilder;
-import pl.wroc.pwr.student.softcomputing.teacher.api.ImageConfigBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.api.ImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Teacher;
 import pl.wroc.pwr.student.softcomputing.teacher.api.TeacherFactory;
@@ -30,7 +25,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 public class FigureTeacherIntegrationTest {
 	private static final String IMAGE_DIR = ".\\src\\test\\resources\\FiguresAndSuits\\";
 	private Teacher figureTeacher;
-	private Images images;
+	private Images<BufferedImage> images;
 	private LearningConfig learningConfig;
 
 	@Before
@@ -46,7 +41,7 @@ public class FigureTeacherIntegrationTest {
 			if(fileEntry.getName().contains("png"))
 				listOfImages.add(fileEntry);
 	    }
-		ImageConfig imageConfig = new TrainingImageConfig(0.5, true, false, "A");
+		ImageConfig imageConfig = new TrainingImageConfig(0.5, true, false);
 		images = imagesBuilder.buildFrom(listOfImages, imageConfig);
 		learningConfig = new NeuralNetworkConfig(10, 0.5, 0.5, 0.5, "target/test.nnet");
 	}

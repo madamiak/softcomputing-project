@@ -7,14 +7,12 @@ public class TrainingImageConfig implements ImageConfig {
 	private final double scale;
 	private final boolean blackAndWhite;
 	private final boolean grayscale;
-	private final String name;
 
 	public TrainingImageConfig(double scale, boolean blackAndWhite,
-			boolean grayscale, String name) {
+			boolean grayscale) {
 		this.scale = scale;
 		this.blackAndWhite = blackAndWhite;
 		this.grayscale = grayscale;
-		this.name = name;
 	}
 
 	@Override
@@ -30,11 +28,6 @@ public class TrainingImageConfig implements ImageConfig {
 	@Override
 	public boolean isGrayscale() {
 		return grayscale;
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 }

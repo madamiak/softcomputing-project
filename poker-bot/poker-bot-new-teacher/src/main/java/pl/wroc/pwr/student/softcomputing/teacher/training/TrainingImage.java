@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Image;
 
-public abstract class TrainingImage implements Image<BufferedImage> {
+public class TrainingImage implements Image<BufferedImage> {
 
 	private final BufferedImage image;
 	private final String name;

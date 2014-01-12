@@ -8,7 +8,7 @@ import java.util.List;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Image;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
 
-public abstract class TrainingImages implements Images<BufferedImage> {
+public class TrainingImages implements Images<BufferedImage> {
 	private final List<Image<BufferedImage>> images = new ArrayList<Image<BufferedImage>>();
 
 	@Override

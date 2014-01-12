@@ -39,7 +39,7 @@ public class FigureImagesBuilderTest {
 		List<File> imageFiles = new ArrayList<>();
 		File imageFile = new File("asd.png");
 		imageFiles.add(imageFile);
-		ImageConfig imageConfig = new TrainingImageConfig(0.1, true, true, "name.nnet");
+		ImageConfig imageConfig = new TrainingImageConfig(0.1, true, true);
 		BufferedImage card = mock(BufferedImage.class);
 		when(tableParser.parseFirstCard()).thenReturn(card);
 		when(tableParser.parseSecondCard()).thenReturn(card);
@@ -64,7 +64,7 @@ public class FigureImagesBuilderTest {
 		File imageFile2 = new File("asdasdasd.png");
 		imageFiles.add(imageFile1);
 		imageFiles.add(imageFile2);
-		ImageConfig imageConfig = new TrainingImageConfig(0.1, false, true, "name.nnet");
+		ImageConfig imageConfig = new TrainingImageConfig(0.1, false, true);
 		BufferedImage card = mock(BufferedImage.class);
 		when(tableParser.parseFirstCard()).thenReturn(card);
 		when(tableParser.parseSecondCard()).thenReturn(card);

@@ -3,8 +3,6 @@ package pl.wroc.pwr.student.softcomputing.teacher.training.figures;
 import java.awt.image.BufferedImage;
 
 import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.events.NeuralNetworkEvent;
-import org.neuroph.core.events.NeuralNetworkEventListener;
 import org.neuroph.core.learning.DataSet;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
@@ -33,16 +31,16 @@ public class FigureTeacher extends AbstractTeacher {
 	
 	@Override
 	protected DataSet createTrainingSet(Images images, int outputSize) {
-		int inputSize = imageConverter.convert(((FigureImages) images).list()
+		int inputSize = imageConverter.convert(((TrainingImages) images).list()
 				.get(0).getData()).length;
 		System.out.println("Training set parameters: input -> " + inputSize + ", output -> " + outputSize);
 		System.out.println("Creating training set...");
 		DataSet trainingSet = new DataSet(inputSize, outputSize);
-		for (Image<BufferedImage> i : ((FigureImages) images).list()) {
+		for (Image<BufferedImage> i : ((TrainingImages) images).list()) {
 			trainingSet.addRow(imageConverter.convert(i.getData()),
 					outputConverter.convert(i.getName()));
 		}
-		System.out.println("Created training set size " + ((FigureImages) images).list().size());
+		System.out.println("Created training set size " + ((TrainingImages) images).list().size());
 		return trainingSet;
 	}
 }

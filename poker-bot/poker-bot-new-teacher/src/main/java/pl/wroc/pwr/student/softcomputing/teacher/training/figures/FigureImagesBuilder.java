@@ -9,6 +9,8 @@ import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.TableParser;
 import pl.wroc.pwr.student.softcomputing.teacher.api.ImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.ImageConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
+import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImage;
+import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImages;
 
 public class FigureImagesBuilder implements ImagesBuilder<BufferedImage, List<File>> {
 
@@ -23,18 +25,18 @@ public class FigureImagesBuilder implements ImagesBuilder<BufferedImage, List<Fi
 	@Override
 	public Images<BufferedImage> buildFrom(List<File> object,
 			ImageConfig imageConfig) {
-		Images<BufferedImage> images = new FigureImages();
+		Images<BufferedImage> images = new TrainingImages();
 		for (File file : object) {
 			tableParser.loadTable(file.getAbsolutePath());
 			
 			BufferedImage firstCard = tableParser.parseFirstCard();
 			firstCard = processImage(imageConfig, firstCard);
-			FigureImage firstCardImage = new FigureImage(firstCard, getFirstCardName(file.getAbsolutePath()));
+			TrainingImage firstCardImage = new TrainingImage(firstCard, getFirstCardName(file.getAbsolutePath()));
 			images.add(firstCardImage);
 			
 			BufferedImage secondCard = tableParser.parseSecondCard();
 			secondCard = processImage(imageConfig, secondCard);
-			FigureImage secondCardImage = new FigureImage(secondCard, getSecondCardName(file.getAbsolutePath()));
+			TrainingImage secondCardImage = new TrainingImage(secondCard, getSecondCardName(file.getAbsolutePath()));
 			images.add(secondCardImage);
 		}
 		return images;
