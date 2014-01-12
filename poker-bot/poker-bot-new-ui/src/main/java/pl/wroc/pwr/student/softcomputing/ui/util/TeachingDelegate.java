@@ -14,6 +14,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.training.NeuralNetworkConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.training.PokerBotTeacherFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.training.figures.FigureImagesBuilder;
+import pl.wroc.pwr.student.softcomputing.teacher.training.suits.SuitImagesBuilder;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,14 +27,20 @@ import java.util.List;
 public class TeachingDelegate {
     public static void teach(List<File> listOfImages, String teacherType, String outputFile, TeachingParams teachingParams) throws InstantiationException {
         TeacherFactory teacherFactory = new PokerBotTeacherFactory();
-        Teacher figureTeacher = teacherFactory.create(teacherType);
+        Teacher cardTeacher = teacherFactory.create(teacherType);
         ImageProcessor imageProcessor = new ImageProcessorImpl();
         TableParser tableParser = new TableParserImpl();
-        ImagesBuilder<BufferedImage, List<File>> imagesBuilder = new FigureImagesBuilder(tableParser , imageProcessor);
+        ImagesBuilder<BufferedImage, List<File>> imagesBuilder=null;
+
+        if(teacherType.equals("figure"))
+            imagesBuilder= new FigureImagesBuilder(tableParser , imageProcessor);
+        if(teacherType.equals("suit"))
+            imagesBuilder= new SuitImagesBuilder(tableParser , imageProcessor);
+
         ImageConfig imageConfig = new TrainingImageConfig(teachingParams.getScale(), teachingParams.isBlackAndWhite(), teachingParams.isGrayscale());
         Images images = imagesBuilder.buildFrom(listOfImages, imageConfig);
         LearningConfig learningConfig = new NeuralNetworkConfig(teachingParams.getMaxIterations(), teachingParams.getLearningRate(), teachingParams.getErrorRate(), teachingParams.getMomentum(), outputFile);
-        figureTeacher.setLearningConfig(learningConfig);
-        figureTeacher.teach(images);
+        cardTeacher.setLearningConfig(learningConfig);
+        cardTeacher.teach(images);
     }
 }

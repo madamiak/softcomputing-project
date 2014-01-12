@@ -82,6 +82,7 @@ public class TeachCardsActionListener implements ActionListener {
         }catch (RuntimeException e1){
             displayMessage("Something went wrong:\n"+e1, e1);
         }
+        displayMessage("File created:\n"+file);
         System.out.println(file);
     }
 
