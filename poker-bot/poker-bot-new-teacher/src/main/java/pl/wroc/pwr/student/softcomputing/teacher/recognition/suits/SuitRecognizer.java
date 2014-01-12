@@ -1,4 +1,4 @@
-package pl.wroc.pwr.student.softcomputing.teacher.recognition.figures;
+package pl.wroc.pwr.student.softcomputing.teacher.recognition.suits;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -13,12 +13,12 @@ import pl.wroc.pwr.student.softcomputing.teacher.api.model.Result;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.OutputConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.StringResult;
 
-public class FigureRecognizer implements Recognizer {
+public class SuitRecognizer implements Recognizer {
 	private final ImageConverter imageConverter;
-	private final OutputConverter outputConvert = new FigureOutputConverter();
+	private final OutputConverter outputConvert = new SuitOutputConverter();
 	private NeuralNetwork neuralNetwork;
 
-	public FigureRecognizer(ImageConverter imageConverter) {
+	public SuitRecognizer(ImageConverter imageConverter) {
 		this.imageConverter = imageConverter;
 	}
 

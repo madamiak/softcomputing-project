@@ -8,13 +8,17 @@ import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverte
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageToArrayConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Recognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.api.RecognizerFactory;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.dealers.DealerRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureRecognizer;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.suits.SuitRecognizer;
 
 public class PokerBotRecognizerFactory implements RecognizerFactory {
 	private final Map<String, Class<?>> recognizers = new HashMap<>();
 	
 	public PokerBotRecognizerFactory() {
 		recognizers.put("figure", FigureRecognizer.class);
+		recognizers.put("suit", SuitRecognizer.class);
+		recognizers.put("dealer", DealerRecognizer.class);
 	}
 
 	@Override
