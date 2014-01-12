@@ -30,7 +30,7 @@ public class DealerRecognizerIntegrationTest {
 	public void setUp() throws Exception {
 		RecognizerFactory recognizerFactory = new PokerBotRecognizerFactory();
 		figureRecognizer = recognizerFactory.create("dealer");
-		figureRecognizer.setNeuralNetwork("d.nnet");
+		figureRecognizer.setNeuralNetwork("src/test/resources/d.nnet");
 		TableParser tableParser = new TableParserImpl();
 		ImageProcessor imageProcessor = new ImageProcessorImpl();
 		ImagesBuilder<BufferedImage, File> imagesBuilder = new DealerImagesBuilder(tableParser, imageProcessor);

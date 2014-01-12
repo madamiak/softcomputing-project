@@ -30,7 +30,7 @@ public class SuitRecognizerIntegrationTest {
 	public void setUp() throws Exception {
 		RecognizerFactory recognizerFactory = new PokerBotRecognizerFactory();
 		figureRecognizer = recognizerFactory.create("suit");
-		figureRecognizer.setNeuralNetwork("s.nnet");
+		figureRecognizer.setNeuralNetwork("src/test/resources/s.nnet");
 		TableParser tableParser = new TableParserImpl();
 		ImageProcessor imageProcessor = new ImageProcessorImpl();
 		ImagesBuilder<BufferedImage, File> imagesBuilder = new SuitImagesBuilder(tableParser, imageProcessor);

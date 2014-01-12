@@ -29,7 +29,7 @@ public class FigureRecognizerIntegrationTest {
 	public void setUp() throws Exception {
 		RecognizerFactory recognizerFactory = new PokerBotRecognizerFactory();
 		figureRecognizer = recognizerFactory.create("figure");
-		figureRecognizer.setNeuralNetwork("test.nnet");
+		figureRecognizer.setNeuralNetwork("src/test/resources/f.nnet");
 		TableParser tableParser = new TableParserImpl();
 		ImageProcessor imageProcessor = new ImageProcessorImpl();
 		ImagesBuilder<BufferedImage, File> imagesBuilder = new FigureImagesBuilder(tableParser, imageProcessor);

@@ -42,9 +42,9 @@ public class DealerTeacherIntegrationTest {
                     if(fileEntry.getName().contains("png"))
                             listOfImages.add(fileEntry);
      }
-            ImageConfig imageConfig = new TrainingImageConfig(0.5, true, false);
+            ImageConfig imageConfig = new TrainingImageConfig(0.1, true, false);
             images = imagesBuilder.buildFrom(listOfImages, imageConfig);
-            learningConfig = new NeuralNetworkConfig(10, 0.5, 0.5, 0.5, "target/test.nnet");
+            learningConfig = new NeuralNetworkConfig(1, 0.5, 0.5, 0.5, "target/test.nnet");
     }
 
     @Test
