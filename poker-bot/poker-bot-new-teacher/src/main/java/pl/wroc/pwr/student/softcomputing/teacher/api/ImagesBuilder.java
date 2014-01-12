@@ -19,7 +19,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
  * @param <Origin>
  *            origin collection of images.
  */
-public interface ImagesBuilder<Representation, Origin extends List<?>> {
+public interface ImagesBuilder<Representation, Origin> {
 
 	/**
 	 * Creates <code>Images</code> instance that holds information about images.

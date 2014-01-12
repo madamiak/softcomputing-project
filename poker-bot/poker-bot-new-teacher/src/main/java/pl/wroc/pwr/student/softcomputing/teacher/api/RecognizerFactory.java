@@ -17,7 +17,8 @@ public interface RecognizerFactory {
 	 * @param type
 	 *            implementation of <code>Recognizer</code> to be created.
 	 * @return instance implementing <code>Recognizer</code> interface.
+	 * @throws InstantiationException 
 	 */
-	Recognizer create(String type);
+	Recognizer create(String type) throws InstantiationException;
 
 }

@@ -1,6 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.teacher.api;
 
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Image;
+import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Result;
 
 /**
@@ -18,11 +19,17 @@ public interface Recognizer {
 	/**
 	 * Recognizes the content of provided image.
 	 * 
-	 * @param image
-	 *            image whose content is to be recognized.
+	 * Returned images object contains 1 image, when recognizing simple pictures
+	 * (like dealer button), and 2 images when recognizing complex pictures
+	 * (like figures or suits)
+	 * 
+	 * @param images
+	 *            images whose content is to be recognized.
 	 * @return result of the recognition.
 	 */
 	@SuppressWarnings("rawtypes")
-	Result recognize(Image image);
+	Result recognize(Images images);
+
+	void setNeuralNetwork(String file);
 
 }

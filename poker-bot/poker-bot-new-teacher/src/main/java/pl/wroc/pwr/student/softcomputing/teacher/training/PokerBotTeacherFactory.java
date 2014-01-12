@@ -15,7 +15,6 @@ import pl.wroc.pwr.student.softcomputing.teacher.training.suits.SuitTeacher;
 
 public class PokerBotTeacherFactory implements TeacherFactory {
 	private final Map<String, Class<?>> teachers = new HashMap<>();
-	private final Map<String, Class<?>> outputConverters = new HashMap<>();
 
 	public PokerBotTeacherFactory() {
 		teachers.put("figure", FigureTeacher.class);
