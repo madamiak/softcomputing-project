@@ -30,27 +30,27 @@ public class DealerTeacherIntegrationTest {
 	private LearningConfig learningConfig;
 
 	@Before
-	public void setUp() throws Exception {
-		TeacherFactory teacherFactory = new PokerBotTeacherFactory();
-		figureTeacher = teacherFactory.create("dealer");
-		ImageProcessor imageProcessor = new ImageProcessorImpl();
-		TableParser tableParser = new TableParserImpl();
-		ImagesBuilder<BufferedImage, List<File>> imagesBuilder = new DealerImagesBuilder(tableParser , imageProcessor);
-		List<File> listOfImages = new ArrayList<>();
-		File imageDir = new File(IMAGE_DIR);
-        for (final File fileEntry : imageDir.listFiles()) {
-			if(fileEntry.getName().contains("png"))
-				listOfImages.add(fileEntry);
-	    }
-		ImageConfig imageConfig = new TrainingImageConfig(0.2, true, false);
-		images = imagesBuilder.buildFrom(listOfImages, imageConfig);
-		learningConfig = new NeuralNetworkConfig(1000, 0.001, 0.0, 0.0, "d.nnet");
-	}
+    public void setUp() throws Exception {
+            TeacherFactory teacherFactory = new PokerBotTeacherFactory();
+            figureTeacher = teacherFactory.create("dealer");
+            ImageProcessor imageProcessor = new ImageProcessorImpl();
+            TableParser tableParser = new TableParserImpl();
+            ImagesBuilder<BufferedImage, List<File>> imagesBuilder = new DealerImagesBuilder(tableParser , imageProcessor);
+            List<File> listOfImages = new ArrayList<>();
+            File imageDir = new File(IMAGE_DIR);
+    for (final File fileEntry : imageDir.listFiles()) {
+                    if(fileEntry.getName().contains("png"))
+                            listOfImages.add(fileEntry);
+     }
+            ImageConfig imageConfig = new TrainingImageConfig(0.5, true, false);
+            images = imagesBuilder.buildFrom(listOfImages, imageConfig);
+            learningConfig = new NeuralNetworkConfig(10, 0.5, 0.5, 0.5, "target/test.nnet");
+    }
 
-	@Test
-	public void test() {
-		figureTeacher.setLearningConfig(learningConfig);
-		figureTeacher.teach(images);
-	}
+    @Test
+    public void test() {
+            figureTeacher.setLearningConfig(learningConfig);
+            figureTeacher.teach(images);
+    }
 
 }
