@@ -202,11 +202,11 @@ public class TableParserImpl implements TableParser {
 			y=62;
 			break;
 		case 4:
-			x=709;
+			x=739;
 			y=134;
 			break;
 		case 5:
-			x=709;
+			x=729;
 			y=323;
 			break;
 		}
