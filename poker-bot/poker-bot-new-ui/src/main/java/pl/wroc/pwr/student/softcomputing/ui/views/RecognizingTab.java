@@ -6,6 +6,7 @@ import pl.wroc.pwr.student.softcomputing.ui.util.FileHolder;
 import pl.wroc.pwr.student.softcomputing.ui.util.LabelUtil;
 
 import javax.swing.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

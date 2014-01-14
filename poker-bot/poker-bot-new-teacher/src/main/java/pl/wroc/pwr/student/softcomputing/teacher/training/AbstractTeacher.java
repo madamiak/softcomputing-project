@@ -68,7 +68,7 @@ public abstract class AbstractTeacher implements Teacher {
 	}
 
 	protected void validate(LearningConfig learningConfig) {
-		if (learningConfig.maxIterations() < 1)
+		if (learningConfig.maxIterations() < 0)
 			throw new IllegalArgumentException();
 		if (learningConfig.learningRate() < 0.0
 				|| learningConfig.learningRate() > 1.0)

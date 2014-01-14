@@ -63,7 +63,7 @@ public class SelectFileActionListener implements ActionListener {
         try{
             int i = elements.length-3;
             if(!elements[i].equals(""))
-                Float.parseFloat(elements[i].replace(",","\\."));
+                Float.parseFloat(elements[i].replace(",","."));
             i++;
             if(!(elements[i].equals("")||elements[i].equals("t")))
                 return false;
