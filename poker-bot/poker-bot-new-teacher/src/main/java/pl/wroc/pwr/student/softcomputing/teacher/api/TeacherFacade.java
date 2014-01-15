@@ -14,7 +14,11 @@ import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Tables;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerBotRecognizerFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerTable;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderImagesBuilder;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsImagesBuilder;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.training.PokerBotTeacherFactory;
+import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.training.dealers.DealerImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.training.figures.FigureImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.training.suits.SuitImagesBuilder;
@@ -89,6 +93,9 @@ public final class TeacherFacade {
 			suitRecognizer.setNeuralNetwork(suitNNFile);
 			Recognizer dealerRecognizer = recognizerFactory.create("dealer");
 			dealerRecognizer.setNeuralNetwork(dealerNNFile);
+			Recognizer chipsRecognizer = recognizerFactory.create("chips");
+			Recognizer tableChipsRecognizer = recognizerFactory.create("tablechips");
+			Recognizer borderRecognizer = recognizerFactory.create("border");
 			
 			imageBuilder = new pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureImagesBuilder(new TableParserImpl(), new ImageProcessorImpl());
 			images = imageBuilder.buildFrom(imageFile, figureImageConfig);
@@ -100,13 +107,28 @@ public final class TeacherFacade {
 			
 			imageBuilder = new pl.wroc.pwr.student.softcomputing.teacher.recognition.dealers.DealerImagesBuilder(new TableParserImpl(), new ImageProcessorImpl());
 			images = imageBuilder.buildFrom(imageFile, dealerImageConfig);
-			Result dealerPosition = figureRecognizer.recognize(images);
+			Result dealerPosition = dealerRecognizer.recognize(images);
 			
 			table.setFigures(figures);
 			table.setSuits(suits);
 			table.setDealerPosition(dealerPosition);
 			
-			System.out.println(table.report());
+			imageBuilder = new ChipsImagesBuilder(new TableParserImpl());
+			images = imageBuilder.buildFrom(imageFile, new TrainingImageConfig(1.0, true, false));
+			Result chips = chipsRecognizer.recognize(images);
+			
+			imageBuilder = new TableChipsImagesBuilder(new TableParserImpl());
+			images = imageBuilder.buildFrom(imageFile, new TrainingImageConfig(1.0, true, false));
+			Result tableChips = tableChipsRecognizer.recognize(images);
+
+			imageBuilder = new BorderImagesBuilder(new TableParserImpl());
+			images = imageBuilder.buildFrom(imageFile, null);
+			Result borders = borderRecognizer.recognize(images);
+			
+			table.setChips(chips);
+			table.setTableChips(tableChips);
+			table.setBorders(borders);
+			
 			return table;
 			
 		} catch (InstantiationException e) {

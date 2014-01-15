@@ -1,6 +1,5 @@
 package pl.wroc.pwr.student.softcomputing.teacher.api;
 
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Image;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Result;
 
@@ -19,9 +18,9 @@ public interface Recognizer {
 	/**
 	 * Recognizes the content of provided image.
 	 * 
-	 * Returned images object contains 1 image, when recognizing simple pictures
-	 * (like dealer button), and 2 images when recognizing complex pictures
-	 * (like figures or suits)
+	 * Given images object should contain 1 image, when recognizing simple
+	 * pictures (like dealer button, chips), and 2 images when recognizing
+	 * complex pictures (like figures or suits)
 	 * 
 	 * @param images
 	 *            images whose content is to be recognized.
