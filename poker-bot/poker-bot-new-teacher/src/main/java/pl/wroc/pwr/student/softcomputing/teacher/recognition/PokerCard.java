@@ -22,7 +22,8 @@ public class PokerCard implements Card {
 	
 	@Override
 	public String toString() {
-		return (figure != "T" ? figure : "10") + " of " + map.get(suit);
+		String string = !figure.equals("T") ? figure : "10";
+		return string + " of " + map.get(suit);
 	}
 
 }

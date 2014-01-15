@@ -18,7 +18,7 @@ public class FigureOutputConverter implements OutputConverter {
 		strings .put("0101", "7");
 		strings .put("0110", "8");
 		strings .put("0111", "9");
-		strings .put("1000", "10");
+		strings .put("1000", "T");
 		strings .put("1001", "J");
 		strings .put("1010", "Q");
 		strings .put("1011", "K");
