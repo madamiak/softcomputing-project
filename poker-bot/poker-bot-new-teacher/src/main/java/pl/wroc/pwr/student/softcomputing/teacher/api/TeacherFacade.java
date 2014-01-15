@@ -16,6 +16,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerBotRecognizerF
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerTable;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsImagesBuilder;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.fold.FoldButtonImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.training.PokerBotTeacherFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
@@ -96,6 +97,7 @@ public final class TeacherFacade {
 			Recognizer chipsRecognizer = recognizerFactory.create("chips");
 			Recognizer tableChipsRecognizer = recognizerFactory.create("tablechips");
 			Recognizer borderRecognizer = recognizerFactory.create("border");
+			Recognizer foldRecognizer = recognizerFactory.create("fold");
 			
 			imageBuilder = new pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureImagesBuilder(new TableParserImpl(), new ImageProcessorImpl());
 			images = imageBuilder.buildFrom(imageFile, figureImageConfig);
@@ -125,9 +127,14 @@ public final class TeacherFacade {
 			images = imageBuilder.buildFrom(imageFile, null);
 			Result borders = borderRecognizer.recognize(images);
 			
+			imageBuilder = new FoldButtonImagesBuilder(new TableParserImpl());
+			images = imageBuilder.buildFrom(imageFile, null);
+			Result foldButton = foldRecognizer.recognize(images);
+			
 			table.setChips(chips);
 			table.setTableChips(tableChips);
 			table.setBorders(borders);
+			table.setFoldButton(foldButton);
 			
 			return table;
 			

@@ -10,6 +10,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderRecogn
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.dealers.DealerRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureRecognizer;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.fold.FoldButtonRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.suits.SuitRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsRecognizer;
 
@@ -30,6 +31,7 @@ public class PokerBotRecognizerFactoryTest {
 		assertRecognizerType(ChipsRecognizer.class, "chips");
 		assertRecognizerType(TableChipsRecognizer.class, "tablechips");
 		assertRecognizerType(BorderRecognizer.class, "border");
+		assertRecognizerType(FoldButtonRecognizer.class, "fold");
 	}
 
 	@Test(expected = InstantiationException.class)

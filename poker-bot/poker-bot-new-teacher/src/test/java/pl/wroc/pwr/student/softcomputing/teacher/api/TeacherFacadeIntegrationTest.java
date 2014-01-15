@@ -21,7 +21,7 @@ public class TeacherFacadeIntegrationTest {
 
 	@Test
 	public void test() {
-		File imageFile = new File(RESOURCES + IMAGE_DIR+"9dTh1.png");
+		File imageFile = new File(RESOURCES + IMAGE_DIR+"8c6c1.png");
 		String figureNNFile = RESOURCES + "f.nnet";
 		ImageConfig figureImageConfig = new TrainingImageConfig(0.3, true, false);
 		String suitNNFile = RESOURCES + "s.nnet";

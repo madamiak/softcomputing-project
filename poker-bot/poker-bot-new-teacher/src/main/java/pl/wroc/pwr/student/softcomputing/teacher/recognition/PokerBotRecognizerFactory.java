@@ -6,10 +6,12 @@ import java.util.Map;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.BorderParser;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ChipsParser;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.FoldParser;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageProcessor;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.BorderParserImpl;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ChipsParserImpl;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.FoldParserImpl;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageProcessorImpl;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageToArrayConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Recognizer;
@@ -18,6 +20,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderRecogn
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.dealers.DealerRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureRecognizer;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.fold.FoldButtonRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.suits.SuitRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsRecognizer;
 
@@ -31,6 +34,7 @@ public class PokerBotRecognizerFactory implements RecognizerFactory {
 		recognizers.put("chips", ChipsRecognizer.class);
 		recognizers.put("tablechips", TableChipsRecognizer.class);
 		recognizers.put("border", BorderRecognizer.class);
+		recognizers.put("fold", FoldButtonRecognizer.class);
 	}
 
 	@Override
@@ -63,8 +67,13 @@ public class PokerBotRecognizerFactory implements RecognizerFactory {
 					Constructor<?> constructor = teacherClass.getConstructor(ChipsParser.class, ImageProcessor.class);
 					newInstance = (Recognizer) constructor.newInstance(new ChipsParserImpl(), new ImageProcessorImpl());
 				} catch (Exception e2) {
-					e2.printStackTrace();
-					throw(e2);
+					try {
+						Constructor<?> constructor = teacherClass.getConstructor(FoldParser.class);
+						newInstance = (Recognizer) constructor.newInstance(new FoldParserImpl());
+					} catch (Exception e3) {
+						e3.printStackTrace();
+						throw(e3);
+					}
 				}
 			}
 		}

@@ -8,6 +8,8 @@ public interface Table {
 
 	void setDealerPosition(Result dealerPosition);
 	
+	void setFoldButton(Result foldButton);
+	
 	void setChips(Result chips);
 	
 	void setTableChips(Result tableChips);
@@ -19,6 +21,8 @@ public interface Table {
 	Card getSecondCard();
 	
 	int getDealerPosition();
+	
+	Fold getFoldButtonStatus();
 	
 	int getTotalChipsOf(int playerIndex);
 	
