@@ -6,6 +6,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by RaV on 17.01.14.
@@ -40,4 +41,14 @@ public class RecognizingDelegate {
         System.out.println(table.report());
         return table.smallReport();
     }
+
+	public static String recognizeAll(List<File> allFiles,
+			FileHolder figuresDatasource, FileHolder suitsDatasource,
+			FileHolder dealerDatasource) {
+		StringBuilder sb = new StringBuilder();
+		for (File file : allFiles) {
+			sb.append(recognize(file, figuresDatasource, suitsDatasource, dealerDatasource));
+		}
+		return sb.toString();
+	}
 }

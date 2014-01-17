@@ -1,6 +1,8 @@
 package pl.wroc.pwr.student.softcomputing.teacher.api.model;
 
 public interface Table {
+	
+	void setReportName(String reportName);
 
 	void setFigures(Result figures);
 	
@@ -15,6 +17,8 @@ public interface Table {
 	void setTableChips(Result tableChips);
 	
 	void setBorders(Result borders);
+	
+	String getReportName();
 	
 	Card getFirstCard();
 	

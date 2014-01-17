@@ -99,6 +99,8 @@ public final class TeacherFacade {
 			Recognizer borderRecognizer = recognizerFactory.create("border");
 			Recognizer foldRecognizer = recognizerFactory.create("fold");
 			
+			table.setReportName(imageFile.getName());
+			
 			imageBuilder = new pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureImagesBuilder(new TableParserImpl(), new ImageProcessorImpl());
 			images = imageBuilder.buildFrom(imageFile, figureImageConfig);
 			Result figures = figureRecognizer.recognize(images);

@@ -15,6 +15,12 @@ public class PokerTable implements Table {
 	private Result tableChips;
 	private Result borders;
 	private Result foldButton;
+	private String reportName;
+
+	@Override
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
+	}
 
 	@Override
 	public void setFigures(Result figures) {
@@ -49,6 +55,11 @@ public class PokerTable implements Table {
 	@Override
 	public void setBorders(Result borders) {
 		this.borders = borders;
+	}
+
+	@Override
+	public String getReportName() {
+		return reportName;
 	}
 
 	@Override
@@ -96,7 +107,8 @@ public class PokerTable implements Table {
     @Override
     public String report() {
         StringBuilder sb = new StringBuilder();
-        sb.append("######################################\n");
+        sb.append("\n######################################\n");
+        sb.append("#"); sb.append("---(Report for "+getReportName()+")---\n");
         sb.append("#"); sb.append("\tHuman\n");
         sb.append("#"); sb.append("\t\t1st card:\t"+getFirstCard()+"\n");
         sb.append("#"); sb.append("\t\t2nd card:\t"+getSecondCard()+"\n");
@@ -113,12 +125,14 @@ public class PokerTable implements Table {
             }
         }
         sb.append("######################################");
+        sb.append("\n");
         return sb.toString();
     }
 
     @Override
     public String smallReport() {
         StringBuilder sb = new StringBuilder();
+        sb.append("\n---(Report for "+getReportName()+")---\n");
         sb.append("Human\n");
         sb.append("\t1st card:\t"+getFirstCard()+"\n");
         sb.append("\t2nd card:\t"+getSecondCard()+"\n");
@@ -134,12 +148,13 @@ public class PokerTable implements Table {
                 sb.append("\tborder:\t\t"+getBorderOf(i)+"\n");
             }
         }
+        sb.append("\n");
         return sb.toString();
     }
 	
 	@Override
 	public String toString() {
-		return report();
+		return smallReport();
 	}
 
 }

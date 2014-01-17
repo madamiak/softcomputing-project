@@ -39,8 +39,9 @@ public class RecognizeSelectedActionListener implements ActionListener {
             return;
         }
         String out=RecognizingDelegate.recognize(getSelectedFile(), figuresDatasource, suitsDatasource, dealerDatasource);
-        output.append("\n\n---(Raport for "+getSelectedFile().getName()+")---\n");
-        output.append("\n"+out);
+        output.append(out);
+//        output.append("\n\n---(Raport for "+getSelectedFile().getName()+")---\n");
+//        output.append("\n"+out);
     }
 
     private void displayMessage(String message){

@@ -16,14 +16,26 @@ public class PokerCard implements Card {
 		map.put("d", "Diamonds");
 		map.put("c", "Clubs");
 		map.put("s", "Spades");
+		map.put("2", "2");
+		map.put("3", "3");
+		map.put("4", "4");
+		map.put("5", "5");
+		map.put("6", "6");
+		map.put("7", "7");
+		map.put("8", "8");
+		map.put("9", "9");
+		map.put("T", "10");
+		map.put("J", "Joker");
+		map.put("Q", "Queen");
+		map.put("K", "King");
+		map.put("A", "As");
 		this.figure = String.valueOf(figure);
 		this.suit = String.valueOf(suit);
 	}
 	
 	@Override
 	public String toString() {
-		String string = !figure.equals("T") ? figure : "10";
-		return string + " of " + map.get(suit);
+		return map.get(figure) + " of " + map.get(suit);
 	}
 
 }

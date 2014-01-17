@@ -63,6 +63,7 @@ public class RecognizingTab {
         saveOutputButton.addActionListener(new SaveTextFileActionListener(outPutTextArea));
         clearOutputButton.addActionListener(new ClearTextAreaActionListener(outPutTextArea));
         recognizeSelectedButton.addActionListener(new RecognizeSelectedActionListener(imageFilesList,outPutTextArea, imagesList, figuresDatasource, suitsDatasource, dealerDatasource));
+        recognizeAllButton.addActionListener(new RecognizeAllActionListener(imageFilesList,outPutTextArea, imagesList, figuresDatasource, suitsDatasource, dealerDatasource));
 
         Font font = new Font("Verdana", Font.PLAIN, 10);
         outPutTextArea.setFont(font);
