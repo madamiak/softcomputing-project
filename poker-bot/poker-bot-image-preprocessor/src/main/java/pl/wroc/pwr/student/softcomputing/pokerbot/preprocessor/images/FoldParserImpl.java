@@ -15,7 +15,8 @@ public class FoldParserImpl implements FoldParser {
 				sum += image.getRGB(i, j)%10;
 			}
 		}
-		return -3 == sum/(image.getHeight() * image.getWidth());
+		int avg = sum/(image.getHeight() * image.getWidth());
+		return -3 == avg || -4 == avg;
 	}
 	
 	public class WrongImageSizeException extends RuntimeException {
