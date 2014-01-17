@@ -77,7 +77,8 @@ public class PokerTable implements Table {
 	public int getTotalChipsOf(int playerIndex) {
 		String chipsOnHand = chips.getResultAsString().split(",")[playerIndex];
 		String chipsOnTable = tableChips.getResultAsString().split(",")[playerIndex];
-		return Integer.parseInt(chipsOnHand) + Integer.parseInt(chipsOnTable);
+		int chipsOnHandInt = Integer.parseInt(chipsOnHand)==Integer.MAX_VALUE ? 0 : Integer.parseInt(chipsOnHand);
+		return chipsOnHandInt + Integer.parseInt(chipsOnTable);
 	}
 
 	@Override

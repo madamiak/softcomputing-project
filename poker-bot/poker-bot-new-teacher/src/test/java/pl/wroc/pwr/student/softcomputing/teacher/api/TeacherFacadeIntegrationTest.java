@@ -21,7 +21,7 @@ public class TeacherFacadeIntegrationTest {
 
 	@Test
 	public void test() {
-		File imageFile = new File(RESOURCES + IMAGE_DIR+"8c6c1.png");
+		File imageFile = new File(RESOURCES + IMAGE_DIR+"Ac7s3.png");
 		String figureNNFile = RESOURCES + "f.nnet";
 		ImageConfig figureImageConfig = new TrainingImageConfig(0.3, true, false);
 		String suitNNFile = RESOURCES + "s.nnet";
@@ -30,6 +30,7 @@ public class TeacherFacadeIntegrationTest {
 		ImageConfig dealerImageConfig = new TrainingImageConfig(0.2, true, false);
 		Table table = facade.recognizeTable(imageFile, figureNNFile, figureImageConfig, suitNNFile, suitImageConfig, dealerNNFile, dealerImageConfig);
 		System.out.println(table.report());
+		System.out.println(table.smallReport());
 	}
 
 }
