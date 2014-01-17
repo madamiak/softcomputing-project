@@ -98,10 +98,10 @@ public class PlayerInfoTeachingView {
         figuresImagesList.addListSelectionListener(new ImagePreviewListSelectionListener(figuresImagesList, imagePanel, figuresImagesDir));
         suitsImagesList.addListSelectionListener(new ImagePreviewListSelectionListener(suitsImagesList, imagePanel, suitsImagesDir));
 
-        figuresTeachButton.addActionListener(new TeachCardsActionListener(figuresScaleCheckBox,figuresScaleTextField, figuresBNWCheckBox,
+        figuresTeachButton.addActionListener(new TeachActionListener(figuresScaleCheckBox,figuresScaleTextField, figuresBNWCheckBox,
                 figuresGrayscaleCheckBox, figuresMaxIterCheckBox, figuresMaxIterTextField, figuresLearningRateCheckBox, figuresLearningRateTextField,
                 figuresErrorRateCheckBox, figuresErrorRateTextField, figuresMomentumCheckBox, figuresMomentumTextField, figuresOutputFilename, figuresOutputDir, figuresImageFilesList,"figure"));
-        suitsTeachButton.addActionListener(new TeachCardsActionListener(suitsScaleCheckBox,suitsScaleTextField, suitsBNWCheckBox,
+        suitsTeachButton.addActionListener(new TeachActionListener(suitsScaleCheckBox,suitsScaleTextField, suitsBNWCheckBox,
                 suitsGrayscaleCheckBox, suitsMaxIterCheckBox, suitsMaxIterTextField, suitsLearningRateCheckBox, suitsLearningRateTextField,
                 suitsErrorRateCheckBox, suitsErrorRateTextField, suitsMomentumCheckBox, suitsMomentumTextField, suitsOutputFilename, suitsOutputDir, suitsImageFilesList,"suit"));
     }

@@ -3,6 +3,8 @@ package pl.wroc.pwr.student.softcomputing.ui.util;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -40,5 +42,13 @@ public class TeachingParamsTest {
         teachingParams.setErrorRate(0.2);
         teachingParams.setMomentum(0.6);
         assertTrue(teachingParams.toNamePostfix().equals("-0,5--t"));
+    }
+
+    @Test
+    public void testStaticMethods() throws Exception {
+        String filename = "dealerTest-0,5-t-.nnet";
+        assertEquals(TeachingParams.getScaleFromFilename(filename),0.5,0.01);
+        assertTrue(TeachingParams.getBNWFromFilename(filename));
+        assertFalse(TeachingParams.getGrayscaleFromFilename(filename));
     }
 }

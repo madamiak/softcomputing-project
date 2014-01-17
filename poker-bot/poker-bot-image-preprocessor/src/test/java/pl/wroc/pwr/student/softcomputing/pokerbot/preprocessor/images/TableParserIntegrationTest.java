@@ -129,7 +129,7 @@ public class TableParserIntegrationTest
 	{
 		for (int i = 1; i <= 5; i++)
 		{
-			testObject.loadTable("src/test/resources/Tournament/1.png");
+			testObject.loadTable("src/test/resources/Borders/1.png");
 			BufferedImage img = testObject.parseOpponentBorder(i);
 			new ImageToFileSaver().save(img, "target/Opponent" + i + "Border.png");
 		}

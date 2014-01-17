@@ -18,6 +18,30 @@ public class TeachingParams {
                 +"-"+parse(grayscale);
     }
 
+    public static double getScaleFromFilename(String filename) {
+        String[] parts=filename.split("-");
+        String scale = parts[parts.length-3].replace(',','.');
+        return Double.parseDouble(scale);
+    }
+
+    public static boolean getBNWFromFilename(String filename) {
+        String[] parts=filename.split("-");
+        String bnw = parts[parts.length-2];
+        if(bnw.equals("t"))
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean getGrayscaleFromFilename(String filename) {
+        String[] parts=filename.split("-");
+        String grayscale= parts[parts.length-1];
+        if(grayscale.startsWith("t"))
+            return true;
+        else
+            return false;
+    }
+
     @Override
     public String toString() {
         return "TeachingParams{" +

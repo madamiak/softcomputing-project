@@ -29,7 +29,9 @@ public interface Table {
 	int getChipsOnTableOf(int playerIndex);
 	
 	Border getBorderOf(int playerIndex);
-	
-	String report();
+
+    String report();
+
+    String smallReport();
 
 }

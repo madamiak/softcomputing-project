@@ -5,8 +5,6 @@ import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.BorderParser;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static java.lang.StrictMath.abs;
-
 /**
  * Created by RaV on 14.01.14.
  */

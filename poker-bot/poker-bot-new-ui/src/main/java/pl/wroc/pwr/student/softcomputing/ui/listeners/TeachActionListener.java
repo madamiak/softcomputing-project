@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by RaV on 04.01.14.
  */
-public class TeachCardsActionListener implements ActionListener {
+public class TeachActionListener implements ActionListener {
     private JCheckBox scaleC;
     private JTextField scaleT;
     private JCheckBox blackAndWhiteC;
@@ -32,7 +32,7 @@ public class TeachCardsActionListener implements ActionListener {
     private List<File> imageFilesList;
     private String teacherType;
 
-    public TeachCardsActionListener(JCheckBox scaleC, JTextField scaleT, JCheckBox blackAndWhiteC, JCheckBox grayscaleC, JCheckBox maxIterC, JTextField maxIterT, JCheckBox learningRateC, JTextField learningRateT, JCheckBox errorRateC, JTextField errorRateT, JCheckBox momentumC, JTextField momentumT, JTextField filenameT, FileHolder fileDir, List<File> imageFilesList, String teacherType) {
+    public TeachActionListener(JCheckBox scaleC, JTextField scaleT, JCheckBox blackAndWhiteC, JCheckBox grayscaleC, JCheckBox maxIterC, JTextField maxIterT, JCheckBox learningRateC, JTextField learningRateT, JCheckBox errorRateC, JTextField errorRateT, JCheckBox momentumC, JTextField momentumT, JTextField filenameT, FileHolder fileDir, List<File> imageFilesList, String teacherType) {
         this.scaleC = scaleC;
         this.scaleT = scaleT;
         this.blackAndWhiteC = blackAndWhiteC;

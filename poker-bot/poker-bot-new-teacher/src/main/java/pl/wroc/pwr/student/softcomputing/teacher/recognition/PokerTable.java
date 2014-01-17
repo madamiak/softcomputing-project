@@ -92,28 +92,49 @@ public class PokerTable implements Table {
 		return new PokerBorder(label);
 	}
 
-	@Override
-	public String report() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("######################################\n");
-		sb.append("#"); sb.append("\tHuman\n");
-		sb.append("#"); sb.append("\t\t1st card:\t"+getFirstCard()+"\n");
-		sb.append("#"); sb.append("\t\t2nd card:\t"+getSecondCard()+"\n");
-		sb.append("#"); sb.append("\t\tdealer pos.:\t"+getDealerPosition()+"\n");
-		sb.append("#"); sb.append("\t\tfold button:\t"+getFoldButtonStatus()+"\n");
-		for (int i = 0; i < 6; i++) {
-			if(i != 0){
-				sb.append("#"); sb.append("\tplayer #"+i+"\n");
-			}
-			sb.append("#"); sb.append("\t\ttotal chips:\t"+getTotalChipsOf(i)+"\n");
-			sb.append("#"); sb.append("\t\ttable chips:\t"+getChipsOnTableOf(i)+"\n");
-			if(i != 0) {
-				sb.append("#"); sb.append("\t\tborder:\t\t"+getBorderOf(i)+"\n");
-			}
-		}
-		sb.append("######################################");
-		return sb.toString();
-	}
+    @Override
+    public String report() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("######################################\n");
+        sb.append("#"); sb.append("\tHuman\n");
+        sb.append("#"); sb.append("\t\t1st card:\t"+getFirstCard()+"\n");
+        sb.append("#"); sb.append("\t\t2nd card:\t"+getSecondCard()+"\n");
+        sb.append("#"); sb.append("\t\tdealer pos.:\t"+getDealerPosition()+"\n");
+        sb.append("#"); sb.append("\t\tfold button:\t"+getFoldButtonStatus()+"\n");
+        for (int i = 0; i < 6; i++) {
+            if(i != 0){
+                sb.append("#"); sb.append("\tplayer #"+i+"\n");
+            }
+            sb.append("#"); sb.append("\t\ttotal chips:\t"+getTotalChipsOf(i)+"\n");
+            sb.append("#"); sb.append("\t\ttable chips:\t"+getChipsOnTableOf(i)+"\n");
+            if(i != 0) {
+                sb.append("#"); sb.append("\t\tborder:\t\t"+getBorderOf(i)+"\n");
+            }
+        }
+        sb.append("######################################");
+        return sb.toString();
+    }
+
+    @Override
+    public String smallReport() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Human\n");
+        sb.append("\t1st card:\t"+getFirstCard()+"\n");
+        sb.append("\t2nd card:\t"+getSecondCard()+"\n");
+        sb.append("\tdealer pos.:\t"+getDealerPosition()+"\n");
+        sb.append("\tfold button:\t"+getFoldButtonStatus()+"\n");
+        for (int i = 0; i < 6; i++) {
+            if(i != 0){
+                sb.append("Player #"+i+"\n");
+            }
+            sb.append("\ttotal chips:\t"+getTotalChipsOf(i)+"\n");
+            sb.append("\ttable chips:\t"+getChipsOnTableOf(i)+"\n");
+            if(i != 0) {
+                sb.append("\tborder:\t\t"+getBorderOf(i)+"\n");
+            }
+        }
+        return sb.toString();
+    }
 	
 	@Override
 	public String toString() {

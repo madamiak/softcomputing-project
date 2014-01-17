@@ -25,7 +25,7 @@ public class FigureOutputConverterTest {
 		assertStringResult("7",  toArray(0, 1, 0, 1));
 		assertStringResult("8",  toArray(0, 1, 1, 0));
 		assertStringResult("9",  toArray(0, 1, 1, 1));
-		assertStringResult("10", toArray(1, 0, 0, 0));
+		assertStringResult("T", toArray(1, 0, 0, 0));
 		assertStringResult("J",  toArray(1, 0, 0, 1));
 		assertStringResult("Q",  toArray(1, 0, 1, 0));
 		assertStringResult("K",  toArray(1, 0, 1, 1));
