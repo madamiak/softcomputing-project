@@ -1,11 +1,14 @@
 package pl.wroc.pwr.student.softcomputing.ui.util;
 
+import pl.wroc.pwr.student.softcomputing.pokerbot.converter.Converter;
 import pl.wroc.pwr.student.softcomputing.teacher.api.TeacherFacade;
+import pl.wroc.pwr.student.softcomputing.teacher.api.model.Fold;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.ImageConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +42,21 @@ public class RecognizingDelegate {
 
         Table table = facade.recognizeTable(selectedFile, figureNNFile, figureImageConfig, suitNNFile, suitImageConfig, dealerNNFile, dealerImageConfig);
         System.out.println(table.report());
-        return table.smallReport();
+
+        List<Integer> totalChips = new ArrayList<Integer>();
+        List<Integer> chipsAtTable = new ArrayList<Integer>();
+        List<String> borders = new ArrayList<String>();
+        borders.add(null);
+        for(int i=0; i<6; i++){
+            totalChips.add(table.getTotalChipsOf(i));
+            chipsAtTable.add(table.getChipsOnTableOf(i));
+            if(i>0)
+                borders.add(table.getBorderOf(i).toString());
+        }
+
+        Converter converter = new Converter(table.getFoldButtonStatus()== Fold.ACTIVE,table.getDealerPosition(),table.getFirstCard().toString(),table.getSecondCard().toString(),totalChips,chipsAtTable, borders);
+
+        return table.smallReport()+"\n"+converter.convertData();
     }
 
 	public static String recognizeAll(List<File> allFiles,

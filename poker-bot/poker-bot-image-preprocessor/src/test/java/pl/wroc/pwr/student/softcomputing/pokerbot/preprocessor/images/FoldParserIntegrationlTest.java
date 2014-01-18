@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.image.BufferedImage;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.FoldParser;
@@ -25,7 +26,7 @@ public class FoldParserIntegrationlTest {
 		BufferedImage image = tableParser.parseFoldButton();
 		assertTrue(foldParser.parseFoldButton(image));
 	}
-	
+	@Ignore
 	@Test
 	public void shouldReturnFalseWhenFoldButtonIsNotPresent() {
 		TableParser tableParser= new TableParserImpl();

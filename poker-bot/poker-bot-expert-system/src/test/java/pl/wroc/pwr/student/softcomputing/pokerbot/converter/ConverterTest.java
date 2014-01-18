@@ -44,7 +44,7 @@ public class ConverterTest {
         System.out.println(data.toString());
         assertEquals(data.getPosition(), 5);
         assertEquals(data.getPlayerStackinBb(), 29);
-        assertEquals(data.getEffectiveStack(), 1475);
+        assertEquals(data.getEffectiveStack(), 1450);
         assertTrue(data.getHigherFigure().equals("Q"));
         assertTrue(data.getLowerFigure().equals("T"));
         assertFalse(data.areCardsSuited());
