@@ -97,17 +97,26 @@ public class ConvertedData {
 
     @Override
     public String toString() {
-        return "ConvertedData{" +
-                "position=" + position +
-                ", playerStackinBb=" + playerStackinBb +
-                ", effectiveStack=" + effectiveStack +
-                ", higherFigure='" + higherFigure + '\'' +
-                ", lowerFigure='" + lowerFigure + '\'' +
-                ", areCardsSuited=" + cardsSuited +
-                ", border=" + border +
-                ", numberOfPlayers=" + numberOfPlayers +
-                ", numberOfRaisers=" + numberOfRaisers +
-                ", numberOfLimpers=" + numberOfLimpers +
-                '}';
+        return "ConvertedData:" +
+                "\n" +
+                "-position=" + position +
+                "\n" +
+                "-playerStackinBb=" + playerStackinBb +
+                "\n" +
+                "-effectiveStack=" + effectiveStack +
+                "\n" +
+                "-higherFigure='" + higherFigure + '\'' +
+                "\n" +
+                "-lowerFigure='" + lowerFigure + '\'' +
+                "\n" +
+                "-areCardsSuited=" + cardsSuited +
+                "\n" +
+                "-border=" + border +
+                "\n" +
+                "-numberOfPlayers=" + numberOfPlayers +
+                "\n" +
+                "-numberOfRaisers=" + numberOfRaisers +
+                "\n" +
+                "-numberOfLimpers=" + numberOfLimpers;
     }
 }

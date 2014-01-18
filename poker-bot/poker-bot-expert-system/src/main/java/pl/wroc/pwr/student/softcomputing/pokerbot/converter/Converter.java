@@ -1,5 +1,6 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.converter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,19 +21,36 @@ public class Converter {
     private List<Boolean> presentAtTable;
     private List<String> border;
 
-    public Converter(boolean isFoldButton, int dealerPosition, int numberOfPlayers, String firstCardFigure, String firstCardSuit, String secondCardFigure, String secondCardSuit, List<Integer> totalChips, List<Integer> chipsAtTable, List<Boolean> presentAtTable, List<String> border) {
+    public Converter(boolean isFoldButton, int dealerPosition, String firstCard, String secondCard, List<Integer> totalChips, List<Integer> chipsAtTable, List<String> border) {
         this.isFoldButton = isFoldButton;
         this.dealerPosition = dealerPosition;
-        this.numberOfPlayers = numberOfPlayers;
-        this.firstCardFigure = firstCardFigure;
-        this.firstCardSuit = firstCardSuit;
-        this.secondCardFigure = secondCardFigure;
-        this.secondCardSuit = secondCardSuit;
+        this.firstCardFigure = firstCard.split(" ")[0];
+        this.firstCardSuit = String.valueOf(firstCard.split(" ")[2].charAt(0)).toLowerCase();
+        this.secondCardFigure = secondCard.split(" ")[0];
+        this.secondCardSuit = String.valueOf(secondCard.split(" ")[2].charAt(0)).toLowerCase();
         this.totalChips = totalChips;
         this.chipsAtTable = chipsAtTable;
-        this.presentAtTable = presentAtTable;
         this.border = border;
+        presentAtTable = calculatePresentAtTable();
+        numberOfPlayers = countNumberOfPlayers();
 
+    }
+
+    private List<Boolean> calculatePresentAtTable() {
+        List<Boolean> present = new ArrayList<Boolean>();
+        for(int i=0;i<6;i++){
+            present.add(totalChips.get(i)>0);
+        }
+        return present;
+    }
+
+    private int countNumberOfPlayers() {
+        int count=0;
+        for(int i=0;i<6;i++){
+            if(totalChips.get(i)>0)
+                count++;
+        }
+        return count;
     }
 
     public ConvertedData convertData(){
@@ -46,7 +64,25 @@ public class Converter {
         data.setNumberOfLimpers(getNumberOfLimpers());
         data.setNumberOfRaisers(getNumberOfRaisers());
         data.setPosition(getPlayerPosition());
+        data.setBorder(getSpecyficBorder());
         return data;
+    }
+
+    private Border getSpecyficBorder() {
+        if(getNumberOfLimpers()+getNumberOfRaisers()==0)
+            return getBorderMap().get(border.get(getBigBlindPosition()-1));
+        else
+        {
+            int index = getBigBlindPosition();
+            int bigBlind = calculateBigBlind();
+            while(true){
+                if(index==6)index = 0;
+                if(chipsAtTable.get(index)>=bigBlind){
+                    return getBorderMap().get(border.get(index));
+                }
+                index++;
+            }
+        }
     }
 
     private int getBigBlindPosition(){
@@ -54,7 +90,7 @@ public class Converter {
         for(int i=0;i<2;i++){
             position++;
             if(position==7)position=1;
-            if(presentAtTable.get(position-1)==false)i--;
+            if(!presentAtTable.get(position-1))i--;
         }
         return position;
     }
@@ -66,15 +102,20 @@ public class Converter {
     private int calculateEffectiveStack(){
         int playerChips = totalChips.get(0);
         int maxOpponentChips = 0;
+        int bbIndex = getBigBlindPosition()-1;
         for(int i=1; i<6; i++){
-            if(totalChips.get(i)>maxOpponentChips)
+            if(totalChips.get(i)>maxOpponentChips&&i<=bbIndex)
+                maxOpponentChips=totalChips.get(i);
+            if(totalChips.get(i)>maxOpponentChips&&chipsAtTable.get(i)>0)
                 maxOpponentChips=totalChips.get(i);
         }
+        System.out.println("player: "+playerChips);
+        System.out.println("maxOpponentChips: "+maxOpponentChips);
         return playerChips<maxOpponentChips ? playerChips : maxOpponentChips;
     }
 
     private int calculatePlayerStackinBb(){
-        int stack = totalChips.get(1);
+        int stack = totalChips.get(0);
         stack = stack-(stack%calculateBigBlind());
         return stack/calculateBigBlind();
     }
@@ -84,8 +125,8 @@ public class Converter {
     }
 
     private String getHigerCardFigure(){
-        int first=0;
-        int second=0;
+        int first;
+        int second;
         try{
             first = Integer.parseInt(firstCardFigure);
         }catch (NumberFormatException e){
