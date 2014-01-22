@@ -5,8 +5,8 @@ package pl.wroc.pwr.student.softcomputing.pokerbot.converter;
  */
 public class ConvertedData {
     private int position;
-    private int playerStackinBb;
-    private int effectiveStack; //Min(myStack,Max(opponentsStacs));
+    private int playerStackInBb;
+    private int effectiveStackInBb; //Min(myStack,Max(opponentsStacs));
     private String higherFigure;
     private String lowerFigure;
     private boolean cardsSuited;
@@ -23,20 +23,20 @@ public class ConvertedData {
         this.position = position;
     }
 
-    public int getPlayerStackinBb() {
-        return playerStackinBb;
+    public int getPlayerStackInBb() {
+        return playerStackInBb;
     }
 
-    public void setPlayerStackinBb(int playerStackinBb) {
-        this.playerStackinBb = playerStackinBb;
+    public void setPlayerStackInBb(int playerStackInBb) {
+        this.playerStackInBb = playerStackInBb;
     }
 
-    public int getEffectiveStack() {
-        return effectiveStack;
+    public int getEffectiveStackInBb() {
+        return effectiveStackInBb;
     }
 
-    public void setEffectiveStack(int effectiveStack) {
-        this.effectiveStack = effectiveStack;
+    public void setEffectiveStackInBb(int effectiveStackInBb) {
+        this.effectiveStackInBb = effectiveStackInBb;
     }
 
     public String getHigherFigure() {
@@ -101,9 +101,9 @@ public class ConvertedData {
                 "\n" +
                 "-position=" + position +
                 "\n" +
-                "-playerStackinBb=" + playerStackinBb +
+                "-playerStackInBb=" + playerStackInBb +
                 "\n" +
-                "-effectiveStack=" + effectiveStack +
+                "-effectiveStackInBb=" + effectiveStackInBb +
                 "\n" +
                 "-higherFigure='" + higherFigure + '\'' +
                 "\n" +

@@ -3,9 +3,7 @@ package pl.wroc.pwr.student.softcomputing.pokerbot.converter;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -43,8 +41,8 @@ public class ConverterTest {
         ConvertedData data = converter.convertData();
         System.out.println(data.toString());
         assertEquals(data.getPosition(), 5);
-        assertEquals(data.getPlayerStackinBb(), 29);
-        assertEquals(data.getEffectiveStack(), 1450);
+        assertEquals(data.getPlayerStackInBb(), 29);
+        assertEquals(data.getEffectiveStackInBb(), 29);
         assertTrue(data.getHigherFigure().equals("Q"));
         assertTrue(data.getLowerFigure().equals("T"));
         assertFalse(data.areCardsSuited());
@@ -77,8 +75,8 @@ public class ConverterTest {
         ConvertedData data = converter.convertData();
         System.out.println(data.toString());
         assertEquals(data.getPosition(), 4);
-        assertEquals(data.getPlayerStackinBb(), 8);
-        assertEquals(data.getEffectiveStack(), 850);
+        assertEquals(data.getPlayerStackInBb(), 8);
+        assertEquals(data.getEffectiveStackInBb(), 8);
         assertTrue(data.getHigherFigure().equals("7"));
         assertTrue(data.getLowerFigure().equals("2"));
         assertFalse(data.areCardsSuited());
@@ -111,8 +109,8 @@ public class ConverterTest {
         ConvertedData data = converter.convertData();
         System.out.println(data.toString());
         assertEquals(data.getPosition(), 6);
-        assertEquals(data.getPlayerStackinBb(), 10);
-        assertEquals(data.getEffectiveStack(), 430);
+        assertEquals(data.getPlayerStackInBb(), 11);
+        assertEquals(data.getEffectiveStackInBb(), 9);
         assertTrue(data.getHigherFigure().equals("10"));
         assertTrue(data.getLowerFigure().equals("9"));
         assertTrue(data.areCardsSuited());

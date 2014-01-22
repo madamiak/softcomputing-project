@@ -55,8 +55,8 @@ public class Converter {
 
     public ConvertedData convertData(){
         ConvertedData data = new ConvertedData();
-        data.setEffectiveStack(calculateEffectiveStack());
-        data.setPlayerStackinBb(calculatePlayerStackinBb());
+        data.setEffectiveStackInBb(calculateEffectiveStackInBb());
+        data.setPlayerStackInBb(calculatePlayerStackInBb());
         data.setCardsSuited(areCardsSuited());
         data.setHigherFigure(getHigerCardFigure());
         data.setLowerFigure(getLowerCardFigure());
@@ -99,7 +99,7 @@ public class Converter {
         return chipsAtTable.get(getBigBlindPosition()-1);
     }
 
-    private int calculateEffectiveStack(){
+    private int calculateEffectiveStackInBb(){
         int playerChips = totalChips.get(0);
         int maxOpponentChips = 0;
         int bbIndex = getBigBlindPosition()-1;
@@ -111,13 +111,20 @@ public class Converter {
         }
         System.out.println("player: "+playerChips);
         System.out.println("maxOpponentChips: "+maxOpponentChips);
-        return playerChips<maxOpponentChips ? playerChips : maxOpponentChips;
+        int effectiveStack = playerChips<maxOpponentChips ? playerChips : maxOpponentChips;
+        System.out.println("Effective stack: "+effectiveStack);
+        int effectiveStackInBB = effectiveStack/calculateBigBlind();
+        if(effectiveStack%calculateBigBlind()>(calculateBigBlind()/2))
+            effectiveStackInBB++;
+        return effectiveStackInBB;
     }
 
-    private int calculatePlayerStackinBb(){
+    private int calculatePlayerStackInBb(){
         int stack = totalChips.get(0);
-        stack = stack-(stack%calculateBigBlind());
-        return stack/calculateBigBlind();
+        int stackInBB = stack/calculateBigBlind();
+        if(stack%calculateBigBlind()>(calculateBigBlind()/2))
+            stackInBB++;
+        return stackInBB;
     }
 
     private boolean areCardsSuited(){
