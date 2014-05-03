@@ -1,15 +1,12 @@
 package pl.wroc.pwr.student.softcomputing.ui.listeners;
 
-import pl.wroc.pwr.student.softcomputing.ui.util.FileHolder;
-import pl.wroc.pwr.student.softcomputing.ui.util.RecognizingDelegate;
-import pl.wroc.pwr.student.softcomputing.ui.util.TeachingDelegate;
-import pl.wroc.pwr.student.softcomputing.ui.util.TeachingParams;
+import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
+import pl.wroc.pwr.student.softcomputing.ui.util.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,10 +35,10 @@ public class RecognizeSelectedActionListener implements ActionListener {
             displayMessage("No images selected.");
             return;
         }
-        String out=RecognizingDelegate.recognize(getSelectedFile(), figuresDatasource, suitsDatasource, dealerDatasource);
-        output.append(out);
-//        output.append("\n\n---(Raport for "+getSelectedFile().getName()+")---\n");
-//        output.append("\n"+out);
+        Table table=RecognizingDelegate.recognize(getSelectedFile(), figuresDatasource, suitsDatasource, dealerDatasource);
+        output.append(table.smallReport());
+        output.append("\n");
+        output.append(ReasoningDelegate.reason(table));
     }
 
     private void displayMessage(String message){

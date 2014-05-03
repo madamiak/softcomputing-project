@@ -68,6 +68,10 @@ public class KnowledgeBase {
         return false;
     }
 
+    public int factCount(){
+        return facts.size();
+    }
+
     @Override
     public String toString() {
         return "KnowledgeBase{" + facts +

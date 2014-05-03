@@ -43,6 +43,7 @@ public class ConverterTest {
         assertEquals(data.getPosition(), 5);
         assertEquals(data.getPlayerStackInBb(), 29);
         assertEquals(data.getEffectiveStackInBb(), 29);
+        assertEquals(data.getFirstRaisePosition(), 0);
         assertTrue(data.getHigherFigure().equals("Q"));
         assertTrue(data.getLowerFigure().equals("T"));
         assertFalse(data.areCardsSuited());
@@ -77,6 +78,7 @@ public class ConverterTest {
         assertEquals(data.getPosition(), 4);
         assertEquals(data.getPlayerStackInBb(), 8);
         assertEquals(data.getEffectiveStackInBb(), 8);
+        assertEquals(data.getFirstRaisePosition(), 0);
         assertTrue(data.getHigherFigure().equals("7"));
         assertTrue(data.getLowerFigure().equals("2"));
         assertFalse(data.areCardsSuited());
@@ -111,8 +113,44 @@ public class ConverterTest {
         assertEquals(data.getPosition(), 6);
         assertEquals(data.getPlayerStackInBb(), 11);
         assertEquals(data.getEffectiveStackInBb(), 9);
-        assertTrue(data.getHigherFigure().equals("10"));
+        assertEquals(5, data.getFirstRaisePosition());
+        assertTrue(data.getHigherFigure().equals("T"));
         assertTrue(data.getLowerFigure().equals("9"));
         assertTrue(data.areCardsSuited());
+    }
+    @Test
+    public void testConvertData4() throws Exception {
+        List<Integer> totalChips = new ArrayList<Integer>();
+        List<Integer> chipsAtTable = new ArrayList<Integer>();
+        List<String> border = new ArrayList<String>();
+        totalChips.add(535);
+        totalChips.add(480);
+        totalChips.add(480);
+        totalChips.add(480);
+        totalChips.add(535);
+        totalChips.add(430);
+        chipsAtTable.add(50);
+        chipsAtTable.add(0);
+        chipsAtTable.add(0);
+        chipsAtTable.add(100);
+        chipsAtTable.add(0);
+        chipsAtTable.add(25);
+        border.add("noLabel");
+        border.add("noLabel");
+        border.add("noLabel");
+        border.add("lime");
+        border.add("noLabel");
+        border.add("noLabel");
+
+        Converter converter = new Converter(true, 5, "Ace of Clubs", "2 of Spades", totalChips, chipsAtTable, border);
+        ConvertedData data = converter.convertData();
+        System.out.println(data.toString());
+        assertEquals(data.getPosition(), 6);
+        assertEquals(data.getPlayerStackInBb(), 11);
+        assertEquals(data.getEffectiveStackInBb(), 10);
+        assertEquals(3, data.getFirstRaisePosition());
+        assertTrue(data.getHigherFigure().equals("A"));
+        assertTrue(data.getLowerFigure().equals("2"));
+        assertFalse(data.areCardsSuited());
     }
 }

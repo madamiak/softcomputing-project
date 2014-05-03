@@ -24,16 +24,17 @@ public class Converter {
     public Converter(boolean isFoldButton, int dealerPosition, String firstCard, String secondCard, List<Integer> totalChips, List<Integer> chipsAtTable, List<String> border) {
         this.isFoldButton = isFoldButton;
         this.dealerPosition = dealerPosition;
-        this.firstCardFigure = firstCard.split(" ")[0];
+        this.firstCardFigure = String.valueOf(firstCard.split(" ")[0].charAt(0)).toUpperCase();
         this.firstCardSuit = String.valueOf(firstCard.split(" ")[2].charAt(0)).toLowerCase();
-        this.secondCardFigure = secondCard.split(" ")[0];
+        this.secondCardFigure = String.valueOf(secondCard.split(" ")[0].charAt(0)).toUpperCase();
         this.secondCardSuit = String.valueOf(secondCard.split(" ")[2].charAt(0)).toLowerCase();
         this.totalChips = totalChips;
         this.chipsAtTable = chipsAtTable;
         this.border = border;
+        if(this.firstCardFigure.equals("1"))this.firstCardFigure="T";
+        if(this.secondCardFigure.equals("1"))this.secondCardFigure="T";
         presentAtTable = calculatePresentAtTable();
         numberOfPlayers = countNumberOfPlayers();
-
     }
 
     private List<Boolean> calculatePresentAtTable() {
@@ -64,6 +65,7 @@ public class Converter {
         data.setNumberOfLimpers(getNumberOfLimpers());
         data.setNumberOfRaisers(getNumberOfRaisers());
         data.setPosition(getPlayerPosition());
+        data.setFirstRaisePosition(getFirstRaisePosition());
         data.setBorder(getSpecyficBorder());
         return data;
     }
@@ -147,15 +149,33 @@ public class Converter {
         if(first>second)return firstCardFigure;
         if(first<second)return secondCardFigure;
 
-        if(firstCardFigure.equals("A"))return firstCardFigure;
-        if(secondCardFigure.equals("A"))return secondCardFigure;
-        if(firstCardFigure.equals("K"))return firstCardFigure;
-        if(secondCardFigure.equals("K"))return secondCardFigure;
-        if(firstCardFigure.equals("Q"))return firstCardFigure;
-        if(secondCardFigure.equals("Q"))return secondCardFigure;
-        if(firstCardFigure.equals("J"))return firstCardFigure;
-        if(secondCardFigure.equals("J"))return secondCardFigure;
-        if(firstCardFigure.equals("T"))return firstCardFigure;
+        if(firstCardFigure.equals("A")){
+            return firstCardFigure;
+        }
+        if(secondCardFigure.equals("A")){
+            return secondCardFigure;
+        }
+        if(firstCardFigure.equals("K")){
+            return firstCardFigure;
+        }
+        if(secondCardFigure.equals("K")){
+            return secondCardFigure;
+        }
+        if(firstCardFigure.equals("Q")){
+            return firstCardFigure;
+        }
+        if(secondCardFigure.equals("Q")){
+            return secondCardFigure;
+        }
+        if(firstCardFigure.equals("J")){
+            return firstCardFigure;
+        }
+        if(secondCardFigure.equals("J")){
+            return secondCardFigure;
+        }
+        if(firstCardFigure.equals("T")){
+            return firstCardFigure;
+        }
         return secondCardFigure;
     }
 
@@ -191,6 +211,20 @@ public class Converter {
         while(true){
             index++;
             if(index==7)return position;
+            if(presentAtTable.get(index-1))position++;
+        }
+    }
+
+    private int getFirstRaisePosition(){
+        int position = 7-numberOfPlayers;
+        int bigBlind = calculateBigBlind();
+        int bigBlindPosition=getBigBlindPosition();
+        int index=bigBlindPosition;
+        while(true){
+            index++;
+            if(index==7)index=1;
+            if(index==bigBlindPosition)return 0;
+            if(chipsAtTable.get(index-1)>bigBlind)return position;
             if(presentAtTable.get(index-1))position++;
         }
     }

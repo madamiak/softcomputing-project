@@ -1,27 +1,20 @@
 package pl.wroc.pwr.student.softcomputing.ui.util;
 
-import pl.wroc.pwr.student.softcomputing.pokerbot.converter.ConvertedData;
-import pl.wroc.pwr.student.softcomputing.pokerbot.converter.Converter;
-import pl.wroc.pwr.student.softcomputing.pokerbot.expertSystem.Engine;
-import pl.wroc.pwr.student.softcomputing.pokerbot.expertSystem.ExpertSystem;
-import pl.wroc.pwr.student.softcomputing.pokerbot.expertSystem.Fact;
 import pl.wroc.pwr.student.softcomputing.teacher.api.TeacherFacade;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Fold;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.ImageConfig;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by RaV on 17.01.14.
  */
 public class RecognizingDelegate {
-    public static String recognize(File selectedFile, FileHolder figuresDatasource, FileHolder suitsDatasource, FileHolder dealerDatasource) {
+    public static Table recognize(File selectedFile, FileHolder figuresDatasource, FileHolder suitsDatasource, FileHolder dealerDatasource) {
 
-        TeacherFacade facade = TeacherFacade.getInstance();;
+        TeacherFacade facade = TeacherFacade.getInstance();
 
         String figureNNFile = figuresDatasource.getFile().toString();
         double scale = TeachingParams.getScaleFromFilename(figureNNFile);
@@ -47,28 +40,7 @@ public class RecognizingDelegate {
         Table table = facade.recognizeTable(selectedFile, figureNNFile, figureImageConfig, suitNNFile, suitImageConfig, dealerNNFile, dealerImageConfig);
         System.out.println(table.report());
 
-        List<Integer> totalChips = new ArrayList<Integer>();
-        List<Integer> chipsAtTable = new ArrayList<Integer>();
-        List<String> borders = new ArrayList<String>();
-        borders.add(null);
-        for(int i=0; i<6; i++){
-            totalChips.add(table.getTotalChipsOf(i));
-            chipsAtTable.add(table.getChipsOnTableOf(i));
-            if(i>0)
-                borders.add(table.getBorderOf(i).toString());
-        }
-
-        Converter converter = new Converter(table.getFoldButtonStatus()== Fold.ACTIVE,table.getDealerPosition(),table.getFirstCard().toString(),table.getSecondCard().toString(),totalChips,chipsAtTable, borders);
-        ConvertedData convertedData = converter.convertData();
-        Engine engine = new ExpertSystem().getBasicStrategyEngine(convertedData);
-        String answer="";
-        if(engine.performBackwardChaining(new Fact("Raise"))){
-            answer="Player should RAISE in this situation!";
-        }else{
-            answer="Player should FOLD in this situation!";
-        }
-        String engineOutput = engine.getOutPut();
-        return table.smallReport()+"\n"+convertedData+"\n\n"+engineOutput+"\n"+answer;
+        return table;
     }
 
 	public static String recognizeAll(List<File> allFiles,

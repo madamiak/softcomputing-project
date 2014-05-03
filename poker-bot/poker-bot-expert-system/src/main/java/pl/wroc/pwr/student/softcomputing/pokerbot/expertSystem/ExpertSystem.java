@@ -15,8 +15,8 @@ public class ExpertSystem {
     public Engine getBasicStrategyEngine(ConvertedData convertedData){
         KnowledgeBase knowledgeBase = getBasicKnowledgeBaseFromConverdedData(convertedData);
         System.out.println("Knowledgebase: "+knowledgeBase);
-        List<Rule> rules = getBasicStrategyRuleList();
-        return new Engine(rules,knowledgeBase);
+        RuleGroup basicRules = getBasicStrategyRuleGroup();
+        return new Engine(basicRules.getRules(),knowledgeBase);
     }
 
     private KnowledgeBase getBasicKnowledgeBaseFromConverdedData(ConvertedData convertedData){
@@ -39,11 +39,11 @@ public class ExpertSystem {
         return new KnowledgeBase(facts);
     }
 
-    private List<Rule> getBasicStrategyRuleList(){
-
+    private RuleGroup getBasicStrategyRuleGroup(){
 
         List<Rule> rules = new ArrayList<Rule>();
         List<Fact> conditions;
+        RuleGroup basicRules = new RuleGroup("Basic rules",rules);
 
         conditions = new ArrayList<Fact>();
         conditions.add(new Fact("No Limpers"));
@@ -176,7 +176,7 @@ public class ExpertSystem {
         rules.add(new Rule(new Fact("Raise"),new Antecedent(conditions)));
 
 
-        return rules;
+        return basicRules;
     }
 
     private void addBasicStrategyCardGroupERules(List<Rule> rules) {

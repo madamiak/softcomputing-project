@@ -25,10 +25,10 @@ public class PokerCard implements Card {
 		map.put("8", "8");
 		map.put("9", "9");
 		map.put("T", "10");
-		map.put("J", "Joker");
+		map.put("J", "Jack");
 		map.put("Q", "Queen");
 		map.put("K", "King");
-		map.put("A", "As");
+		map.put("A", "Ace");
 		this.figure = String.valueOf(figure);
 		this.suit = String.valueOf(suit);
 	}

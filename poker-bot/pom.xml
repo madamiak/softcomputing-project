@@ -6,9 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>poker-bot-image-preprocessor</module>
-  	<module>poker-bot-image-recognition-spike</module>
-  	<module>poker-bot-teacher</module>
-  	<module>poker-bot-ui</module>
 	<module>poker-bot-new-ui</module>
 	<module>poker-bot-new-teacher</module>
 	<module>poker-bot-expert-system</module>

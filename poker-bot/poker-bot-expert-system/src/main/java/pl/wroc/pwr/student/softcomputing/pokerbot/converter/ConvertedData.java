@@ -5,6 +5,7 @@ package pl.wroc.pwr.student.softcomputing.pokerbot.converter;
  */
 public class ConvertedData {
     private int position;
+    private int firstRaisePosition;
     private int playerStackInBb;
     private int effectiveStackInBb; //Min(myStack,Max(opponentsStacs));
     private String higherFigure;
@@ -21,6 +22,14 @@ public class ConvertedData {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public int getFirstRaisePosition() {
+        return firstRaisePosition;
+    }
+
+    public void setFirstRaisePosition(int firstRaisePosition) {
+        this.firstRaisePosition = firstRaisePosition;
     }
 
     public int getPlayerStackInBb() {
@@ -100,6 +109,8 @@ public class ConvertedData {
         return "ConvertedData:" +
                 "\n" +
                 "-position=" + position +
+                "\n" +
+                "-firstRaisePosition=" + firstRaisePosition +
                 "\n" +
                 "-playerStackInBb=" + playerStackInBb +
                 "\n" +

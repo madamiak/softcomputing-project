@@ -19,4 +19,16 @@ public class Rule {
     public Antecedent getAntecedent() {
         return antecedent;
     }
+
+
+    public static Rule getFromString(String fromString) {
+        Fact f = Fact.getFromString(fromString.split(";")[0]);
+        Antecedent a = Antecedent.getFromString(fromString.split(";")[1]);
+        return new Rule(f,a);
+    }
+
+    @Override
+    public String toString() {
+        return consequent + ";" + antecedent;
+    }
 }
