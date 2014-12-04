@@ -46,7 +46,7 @@ public class ExpertSystemTest extends TestCase {
         ConvertedData data = converter.convertData();
         ExpertSystem expertSystem = new ExpertSystem();
         Engine engine = expertSystem.getBasicStrategyEngine(data);
-        boolean isProven = engine.performBackwardChaining(new Fact("Raise"));
+        boolean isProven = engine.performBackwardChaining(new Fact("Raise")).isPositive();
         System.out.println(engine.getOutPut());
         assertTrue(isProven);
     }
@@ -79,7 +79,7 @@ public class ExpertSystemTest extends TestCase {
         ConvertedData data = converter.convertData();
         ExpertSystem expertSystem = new ExpertSystem();
         Engine engine = expertSystem.getBasicStrategyEngine(data);
-        boolean isProven = engine.performBackwardChaining(new Fact("Raise"));
+        boolean isProven = engine.performBackwardChaining(new Fact("Raise")).isPositive();
         System.out.println(engine.getOutPut());
         assertFalse(isProven);
     }

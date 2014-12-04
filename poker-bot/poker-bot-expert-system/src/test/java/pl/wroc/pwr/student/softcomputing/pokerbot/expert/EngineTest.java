@@ -20,7 +20,7 @@ public class EngineTest {
         Fact hypothesis = new Fact("Raise");
         Fact record = new Fact("Raise");
         engine.addToKnowledgeBase(record);
-        boolean isProven = engine.performBackwardChaining(hypothesis);
+        boolean isProven = engine.performBackwardChaining(hypothesis).isPositive();
         System.out.println(engine.getOutPut());
         assertTrue(isProven);
     }
@@ -56,7 +56,7 @@ public class EngineTest {
         Fact raiseFact = new Fact("Raise");
         Rule raiseSmallBlindGroupAHandRule = new Rule(raiseFact,smallBlindStrongHandAntecedent);
         engine.addRule(raiseSmallBlindGroupAHandRule);
-        boolean isProven = engine.performBackwardChaining(hypothesis);
+        boolean isProven = engine.performBackwardChaining(hypothesis).isPositive();
         System.out.println(engine.getOutPut());
         assertTrue(isProven);
     }
