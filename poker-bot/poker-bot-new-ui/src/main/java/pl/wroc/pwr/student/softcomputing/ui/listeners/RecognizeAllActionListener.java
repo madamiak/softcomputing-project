@@ -36,7 +36,7 @@ public class RecognizeAllActionListener implements ActionListener {
             return;
         }
         String out=RecognizingDelegate.recognizeAll(getAllFiles(), figuresDatasource, suitsDatasource, dealerDatasource);
-        output.append(out);
+        output.setText(out);
 	}
 
     private void displayMessage(String message){

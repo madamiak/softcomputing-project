@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class LoadKbsActionListener implements ActionListener {
     private FileHolder file;
-    private List<KnowledgeCommandData> knoledgeBaseScheme;
+    private List<KnowledgeCommandData> knowledgeBaseScheme;
     private DefaultListModel kbsListModel;
 
-    public LoadKbsActionListener(FileHolder file, List<KnowledgeCommandData> knoledgeBaseScheme, DefaultListModel kbsListModel) {
+    public LoadKbsActionListener(FileHolder file, List<KnowledgeCommandData> knowledgeBaseScheme, DefaultListModel kbsListModel) {
         this.file = file;
-        this.knoledgeBaseScheme = knoledgeBaseScheme;
+        this.knowledgeBaseScheme = knowledgeBaseScheme;
         this.kbsListModel = kbsListModel;
     }
 
@@ -30,10 +30,10 @@ public class LoadKbsActionListener implements ActionListener {
             return;
         }
         try {
-            knoledgeBaseScheme.clear();
-            knoledgeBaseScheme.addAll(ExpertAPI.getKnowledgeSchemeFromFile(file.getFileDir()));
+            knowledgeBaseScheme.clear();
+            knowledgeBaseScheme.addAll(ExpertAPI.getKnowledgeSchemeFromFile(file.getFileDir()));
             kbsListModel.removeAllElements();
-            for(KnowledgeCommandData data : knoledgeBaseScheme){
+            for(KnowledgeCommandData data : knowledgeBaseScheme){
                 kbsListModel.addElement(data.getName());
             }
         } catch (Exception e1) {

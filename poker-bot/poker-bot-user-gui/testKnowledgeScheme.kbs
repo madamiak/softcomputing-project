@@ -1,0 +1,14 @@
+Random border;Border;Random;Equal
+Not suited cards;True/False;suited;False
+Lower figure = 8;Text;lowerCardFigure;Equal;8
+Effective stack > 5;Numeric;effectiveStackInBb;Greater than;5
+Test uno due tres;Border;Random;Equal
+Suited;True/False;suited;True
+Ace;Text;higherCardFigure;Equal;A
+King;Text;higherCardFigure;Equal;K
+King;Text;lowerCardFigure;Equal;K
+7;Text;higherCardFigure;Equal;7
+7;Text;lowerCardFigure;Equal;7
+2;Text;lowerCardFigure;Equal;7
+No Limpers;Numeric;numberOfLimpers;Less;1
+No Raisers;Numeric;numberOfRaisers;Less;1

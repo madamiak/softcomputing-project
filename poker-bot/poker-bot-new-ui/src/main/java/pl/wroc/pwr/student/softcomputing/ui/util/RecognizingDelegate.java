@@ -38,7 +38,7 @@ public class RecognizingDelegate {
 
 
         Table table = facade.recognizeTable(selectedFile, figureNNFile, figureImageConfig, suitNNFile, suitImageConfig, dealerNNFile, dealerImageConfig);
-        System.out.println(table.report());
+        System.out.println(table.smallReport());
 
         return table;
     }
@@ -47,9 +47,31 @@ public class RecognizingDelegate {
 			FileHolder figuresDatasource, FileHolder suitsDatasource,
 			FileHolder dealerDatasource) {
 		StringBuilder sb = new StringBuilder();
+        int count=0;
+        int correct=0;
+        long millis=System.currentTimeMillis();
 		for (File file : allFiles) {
-			sb.append(recognize(file, figuresDatasource, suitsDatasource, dealerDatasource));
+            Table t = recognize(file, figuresDatasource, suitsDatasource, dealerDatasource);
+            count+=2;
+
+            String firstFigure = String.valueOf(t.getFirstCard().toString().split(" ")[0].charAt(0)).toUpperCase();
+            String secondFigure = String.valueOf(t.getSecondCard().toString().split(" ")[0].charAt(0)).toUpperCase();
+
+            String firstCard = (firstFigure.equals("1") ? "T" : firstFigure)+String.valueOf(t.getFirstCard().toString().split(" ")[2].charAt(0)).toLowerCase();
+            String secondCard = (secondFigure.equals("1") ? "T" : secondFigure)+String.valueOf(t.getSecondCard().toString().split(" ")[2].charAt(0)).toLowerCase();
+
+            String firstRead=file.getName().substring(0,2);
+            String secondRead=file.getName().substring(2,4);
+
+            if(firstCard.equals(firstRead))correct++;
+            else sb.append("\nFile: ").append(file.getName()).append(" 1st card, file: ").append(firstRead).append(", table: ").append(firstCard);
+            if(secondCard.equals(secondRead))correct++;
+            else sb.append("\nFile: ").append(file.getName()).append(" 2nd card, file: ").append(secondRead).append(", table: ").append(secondCard);
+
+            System.out.println("First card: "+firstCard+", second card: "+secondCard+", first read: "+firstRead+", second read: "+secondRead);
+            //sb.append(t);
 		}
-		return sb.toString();
+
+        return String.format("Correctly recognized %d out of %d which is %d%% in average of %d ms per table.", correct, count, (correct*100)/count, (System.currentTimeMillis()-millis)/(count/2))+sb.toString();
 	}
 }

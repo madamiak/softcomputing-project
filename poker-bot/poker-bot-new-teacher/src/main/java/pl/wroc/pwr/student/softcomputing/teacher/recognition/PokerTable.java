@@ -15,7 +15,8 @@ public class PokerTable implements Table {
 	private Result tableChips;
 	private Result borders;
 	private Result foldButton;
-	private String reportName;
+    private Result gamePhase;
+    private String reportName;
 
 	@Override
 	public void setReportName(String reportName) {
@@ -57,7 +58,12 @@ public class PokerTable implements Table {
 		this.borders = borders;
 	}
 
-	@Override
+    @Override
+    public void setGamePhase(Result gamePhase) {
+        this.gamePhase = gamePhase;
+    }
+
+    @Override
 	public String getReportName() {
 		return reportName;
 	}
@@ -88,7 +94,7 @@ public class PokerTable implements Table {
 	public int getTotalChipsOf(int playerIndex) {
 		String chipsOnHand = chips.getResultAsString().split(",")[playerIndex];
 		String chipsOnTable = tableChips.getResultAsString().split(",")[playerIndex];
-		int chipsOnHandInt = Integer.parseInt(chipsOnHand)==Integer.MAX_VALUE ? 0 : Integer.parseInt(chipsOnHand);
+		int chipsOnHandInt = Integer.parseInt(chipsOnHand)==Integer.MAX_VALUE ? 1 : Integer.parseInt(chipsOnHand);
 		return chipsOnHandInt + Integer.parseInt(chipsOnTable);
 	}
 
@@ -105,6 +111,11 @@ public class PokerTable implements Table {
 	}
 
     @Override
+    public int getGamePhase() {
+        return Integer.parseInt(gamePhase.getResultAsString());
+    }
+
+    @Override
     public String report() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n######################################\n");
@@ -114,6 +125,7 @@ public class PokerTable implements Table {
         sb.append("#"); sb.append("\t\t2nd card:\t"+getSecondCard()+"\n");
         sb.append("#"); sb.append("\t\tdealer pos.:\t"+getDealerPosition()+"\n");
         sb.append("#"); sb.append("\t\tfold button:\t"+getFoldButtonStatus()+"\n");
+        sb.append("#"); sb.append("\t\tgame phase:\t"+getGamePhase()+"\n");
         for (int i = 0; i < 6; i++) {
             if(i != 0){
                 sb.append("#"); sb.append("\tplayer #"+i+"\n");
@@ -138,6 +150,7 @@ public class PokerTable implements Table {
         sb.append("\t2nd card:\t"+getSecondCard()+"\n");
         sb.append("\tdealer pos.:\t"+getDealerPosition()+"\n");
         sb.append("\tfold button:\t"+getFoldButtonStatus()+"\n");
+        sb.append("\tgame phase:\t"+getGamePhase()+"\n");
         for (int i = 0; i < 6; i++) {
             if(i != 0){
                 sb.append("Player #"+i+"\n");

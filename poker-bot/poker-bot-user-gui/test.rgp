@@ -1,0 +1,6 @@
+Group: Position rule group
+Fact: First to act;No Limpers,No Raisers
+Fact: Under the gun;First to act
+Group: Hands rules
+Fact: Top Hand;Suited,Ace,King
+Fact: Worst Hand;2,7

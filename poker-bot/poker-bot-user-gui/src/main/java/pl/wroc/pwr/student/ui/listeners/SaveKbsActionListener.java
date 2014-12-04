@@ -53,7 +53,6 @@ public class SaveKbsActionListener implements ActionListener {
             if(!filename.endsWith(KBS_FORMAT))filename = filename+KBS_FORMAT;
 
             file.setFileDir(dir+ File.separator+filename);
-            System.out.println(knoledgeBaseScheme);
             try {
                 ExpertAPI.storeKnowledgeSchemeInFile(file.getFileDir(),knoledgeBaseScheme);
                 JOptionPane.showMessageDialog(null, String.format("Successfully saved knowledge base scheme to %s file.", filename));

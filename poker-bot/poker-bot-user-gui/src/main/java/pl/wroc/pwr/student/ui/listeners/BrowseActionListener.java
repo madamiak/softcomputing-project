@@ -15,14 +15,18 @@ public class BrowseActionListener implements ActionListener {
     private FileHolder file;
     private JTextField display;
 
-    public BrowseActionListener(FileHolder file, JTextField display) {
+    JFileChooser chooser;
+
+    public BrowseActionListener(FileHolder file, JTextField display, FileNameExtensionFilter filter) {
         this.file = file;
         this.display = display;
+
+        chooser = new JFileChooser();
+        chooser.setFileFilter(filter);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFileChooser chooser = new JFileChooser();
         if(file.getFileDir()==null)
             chooser.setCurrentDirectory(new File("."));
         else
@@ -30,10 +34,6 @@ public class BrowseActionListener implements ActionListener {
         chooser.setDialogTitle("Select file");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setAcceptAllFileFilterUsed(false);
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Knowledge Base Scheme format (*.kbs)", "kbs");
-        chooser.setFileFilter(filter);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             System.out.println("getSelectedFile() : " + chooser.getSelectedFile());

@@ -9,5 +9,6 @@
 	<module>poker-bot-new-ui</module>
 	<module>poker-bot-new-teacher</module>
 	<module>poker-bot-expert-system</module>
+	<module>poker-bot-user-gui</module>
   </modules>
 </project>

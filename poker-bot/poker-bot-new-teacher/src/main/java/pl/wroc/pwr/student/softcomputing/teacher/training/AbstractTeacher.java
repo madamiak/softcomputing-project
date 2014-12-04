@@ -1,18 +1,17 @@
 package pl.wroc.pwr.student.softcomputing.teacher.training;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.learning.DataSet;
 import org.neuroph.core.learning.LearningRule;
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
-
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Teacher;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
 import pl.wroc.pwr.student.softcomputing.teacher.api.model.LearningConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractTeacher implements Teacher {
 

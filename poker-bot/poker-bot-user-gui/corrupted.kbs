@@ -1,0 +1,4 @@
+Random border;Border;Random;equal
+;
+Lower figure = 8;String;lowerCardFigure;equal;8
+Effective stack > 5;Int;effectiveStackInBb;greater;5

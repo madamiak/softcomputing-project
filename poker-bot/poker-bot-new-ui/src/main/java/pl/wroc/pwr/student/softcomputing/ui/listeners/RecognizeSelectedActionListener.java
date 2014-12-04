@@ -36,7 +36,7 @@ public class RecognizeSelectedActionListener implements ActionListener {
             return;
         }
         Table table=RecognizingDelegate.recognize(getSelectedFile(), figuresDatasource, suitsDatasource, dealerDatasource);
-        output.append(table.smallReport());
+        output.setText(table.smallReport());
         output.append("\n");
         output.append(ReasoningDelegate.reason(table));
     }

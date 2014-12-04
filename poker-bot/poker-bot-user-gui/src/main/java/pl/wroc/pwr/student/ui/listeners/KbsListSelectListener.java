@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * Created by RaV on 21.04.14.
  */
-public class ListSelectListener implements ListSelectionListener {
+public class KbsListSelectListener implements ListSelectionListener {
     KnowledgeSchemesView knowledgeSchemesView;
     JList schemeList;
     List<KnowledgeCommandData> knowledgeBaseScheme;
 
-    public ListSelectListener(KnowledgeSchemesView knowledgeSchemesView, JList schemeList, List<KnowledgeCommandData> knowledgeBaseScheme) {
+    public KbsListSelectListener(KnowledgeSchemesView knowledgeSchemesView, JList schemeList, List<KnowledgeCommandData> knowledgeBaseScheme) {
         this.knowledgeSchemesView = knowledgeSchemesView;
         this.schemeList=schemeList;
         this.knowledgeBaseScheme=knowledgeBaseScheme;

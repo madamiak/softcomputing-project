@@ -4,16 +4,8 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.BorderParser;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ChipsParser;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.FoldParser;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageConverter;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageProcessor;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.BorderParserImpl;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ChipsParserImpl;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.FoldParserImpl;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageProcessorImpl;
-import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageToArrayConverter;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.*;
+import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.*;
 import pl.wroc.pwr.student.softcomputing.teacher.api.Recognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.api.RecognizerFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderRecognizer;
@@ -21,6 +13,7 @@ import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsRecogniz
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.dealers.DealerRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.fold.FoldButtonRecognizer;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.gamephase.GamePhaseRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.suits.SuitRecognizer;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsRecognizer;
 
@@ -34,7 +27,8 @@ public class PokerBotRecognizerFactory implements RecognizerFactory {
 		recognizers.put("chips", ChipsRecognizer.class);
 		recognizers.put("tablechips", TableChipsRecognizer.class);
 		recognizers.put("border", BorderRecognizer.class);
-		recognizers.put("fold", FoldButtonRecognizer.class);
+        recognizers.put("fold", FoldButtonRecognizer.class);
+        recognizers.put("gamephase", GamePhaseRecognizer.class);
 	}
 
 	@Override
@@ -55,7 +49,7 @@ public class PokerBotRecognizerFactory implements RecognizerFactory {
 		if (key == null || !recognizers.containsKey(key)) 
 			throw new InstantiationException("No responder for \"" + key + "\"");
 		Class<?> teacherClass = recognizers.get(key);
-		try {
+        try {
 			Constructor<?> constructor = teacherClass.getConstructor(ImageConverter.class);
 			newInstance = (Recognizer) constructor.newInstance(new ImageToArrayConverter());
 		} catch (NoSuchMethodException e) {
@@ -71,8 +65,13 @@ public class PokerBotRecognizerFactory implements RecognizerFactory {
 						Constructor<?> constructor = teacherClass.getConstructor(FoldParser.class);
 						newInstance = (Recognizer) constructor.newInstance(new FoldParserImpl());
 					} catch (Exception e3) {
-						e3.printStackTrace();
-						throw(e3);
+                        try {
+                            Constructor<?> constructor = teacherClass.getConstructor(GamePhaseProcessor.class);
+                            newInstance = (Recognizer) constructor.newInstance(new GamePhaseProcessorImpl());
+                        } catch (Exception e4) {
+                            e4.printStackTrace();
+                            throw(e4);
+                        }
 					}
 				}
 			}

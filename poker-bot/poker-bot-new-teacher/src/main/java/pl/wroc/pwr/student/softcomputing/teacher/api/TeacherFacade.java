@@ -6,17 +6,13 @@ import java.util.List;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.ImageProcessorImpl;
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images.TableParserImpl;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.ImageConfig;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Images;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.LearningConfig;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Result;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Table;
-import pl.wroc.pwr.student.softcomputing.teacher.api.model.Tables;
+import pl.wroc.pwr.student.softcomputing.teacher.api.model.*;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerBotRecognizerFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.PokerTable;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.border.BorderImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.chips.ChipsImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.fold.FoldButtonImagesBuilder;
+import pl.wroc.pwr.student.softcomputing.teacher.recognition.gamephase.GamePhaseImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.recognition.tablechips.TableChipsImagesBuilder;
 import pl.wroc.pwr.student.softcomputing.teacher.training.PokerBotTeacherFactory;
 import pl.wroc.pwr.student.softcomputing.teacher.training.TrainingImageConfig;
@@ -87,6 +83,13 @@ public final class TeacherFacade {
 			Table table = new PokerTable();
 			Images<BufferedImage> images;
 			ImagesBuilder<BufferedImage, File> imageBuilder;
+
+            Recognizer foldRecognizer = recognizerFactory.create("fold");       //
+            imageBuilder = new FoldButtonImagesBuilder(new TableParserImpl());  //
+            images = imageBuilder.buildFrom(imageFile, null);                   // IF NO FOLD BUTTON
+            Result foldButton = foldRecognizer.recognize(images);               // DO NOT RECOGNIZE
+            table.setFoldButton(foldButton);                                    //
+            if(table.getFoldButtonStatus().equals(Fold.INACTIVE))return table;  //
 			
 			Recognizer figureRecognizer = recognizerFactory.create("figure");
 			figureRecognizer.setNeuralNetwork(figureNNFile);
@@ -96,11 +99,12 @@ public final class TeacherFacade {
 			dealerRecognizer.setNeuralNetwork(dealerNNFile);
 			Recognizer chipsRecognizer = recognizerFactory.create("chips");
 			Recognizer tableChipsRecognizer = recognizerFactory.create("tablechips");
-			Recognizer borderRecognizer = recognizerFactory.create("border");
-			Recognizer foldRecognizer = recognizerFactory.create("fold");
+            Recognizer borderRecognizer = recognizerFactory.create("border");
+            Recognizer gamePhaseRecognizer = recognizerFactory.create("gamephase");
+
 			
 			table.setReportName(imageFile.getName());
-			
+
 			imageBuilder = new pl.wroc.pwr.student.softcomputing.teacher.recognition.figures.FigureImagesBuilder(new TableParserImpl(), new ImageProcessorImpl());
 			images = imageBuilder.buildFrom(imageFile, figureImageConfig);
 			Result figures = figureRecognizer.recognize(images);
@@ -128,15 +132,15 @@ public final class TeacherFacade {
 			imageBuilder = new BorderImagesBuilder(new TableParserImpl());
 			images = imageBuilder.buildFrom(imageFile, null);
 			Result borders = borderRecognizer.recognize(images);
-			
-			imageBuilder = new FoldButtonImagesBuilder(new TableParserImpl());
-			images = imageBuilder.buildFrom(imageFile, null);
-			Result foldButton = foldRecognizer.recognize(images);
+
+            imageBuilder = new GamePhaseImagesBuilder(new TableParserImpl());
+            images = imageBuilder.buildFrom(imageFile, null);
+            Result gamePhase = gamePhaseRecognizer.recognize(images);
 			
 			table.setChips(chips);
 			table.setTableChips(tableChips);
 			table.setBorders(borders);
-			table.setFoldButton(foldButton);
+            table.setGamePhase(gamePhase);
 			
 			return table;
 			

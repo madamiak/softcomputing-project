@@ -17,6 +17,8 @@ public interface Table {
 	void setTableChips(Result tableChips);
 	
 	void setBorders(Result borders);
+
+    void setGamePhase(Result gamePhase);
 	
 	String getReportName();
 	
@@ -33,6 +35,8 @@ public interface Table {
 	int getChipsOnTableOf(int playerIndex);
 	
 	Border getBorderOf(int playerIndex);
+
+    int getGamePhase();
 
     String report();
 

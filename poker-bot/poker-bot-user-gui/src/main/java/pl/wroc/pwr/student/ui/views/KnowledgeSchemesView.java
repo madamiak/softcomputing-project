@@ -8,6 +8,7 @@ import pl.wroc.pwr.student.ui.utils.CardFigure;
 import pl.wroc.pwr.student.ui.utils.FileHolder;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +52,10 @@ public class KnowledgeSchemesView {
 
     public KnowledgeSchemesView() {
         knowledgeSchemeFile = new FileHolder();
-        browseButton.addActionListener(new BrowseActionListener(knowledgeSchemeFile, fileTextField));
+        browseButton.addActionListener(new BrowseActionListener(knowledgeSchemeFile, fileTextField, new FileNameExtensionFilter("Knowledge Base Scheme format (*.kbs)", "kbs")));
         saveButton.addActionListener(new SaveKbsActionListener(knowledgeSchemeFile, knowledgeBaseScheme, fileTextField));
         loadButton.addActionListener(new LoadKbsActionListener(knowledgeSchemeFile, knowledgeBaseScheme, kbsListModel));
-        schemeList.addListSelectionListener(new ListSelectListener(this, schemeList, knowledgeBaseScheme));
+        schemeList.addListSelectionListener(new KbsListSelectListener(this, schemeList, knowledgeBaseScheme));
         typeComboBox.addActionListener(new TypeComboBoxActionListener(this));
         comparatorComboBox.addActionListener(new ComparatorComboBoxActionListener(this));
 
