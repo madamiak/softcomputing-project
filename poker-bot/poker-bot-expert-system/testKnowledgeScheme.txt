@@ -1,0 +1,5 @@
+Random border;Border;Random;Equal
+Not suited cards;True/False;suited;False
+Lower figure = 8;Text;lowerCardFigure;Equal;8
+Effective stack > 5;Numeric;effectiveStackInBb;Greater than;5
+Pair;Text;higherCardFigure;Equal;lowerCardFigure
