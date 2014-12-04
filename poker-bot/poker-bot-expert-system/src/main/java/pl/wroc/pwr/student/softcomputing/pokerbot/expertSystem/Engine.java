@@ -1,5 +1,7 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.expertSystem;
 
+import pl.wroc.pwr.student.softcomputing.pokerbot.utils.ChainingData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class Engine {
     private List<Rule> rules;
     private KnowledgeBase knowledgeBase;
     private String outPut;
+    private List<Fact> provenList;
+    private List<Fact> unprovenList;
 
     public Engine() {
         rules = new ArrayList<Rule>();
@@ -31,22 +35,36 @@ public class Engine {
         rules = new ArrayList<Rule>();
     }
 
-    public boolean performBackwardChaining(Fact hypothesis){
-        outPut=new String("Performing backward chaining for hypothesis: "+hypothesis.getName()+"\n");
+    public ChainingData performBackwardChaining(Fact hypothesis){
+        outPut=new String("Backward chaining for hypothesis: "+hypothesis.getName()+"\n");
+        ChainingData chainingData = new ChainingData();
         //System.out.println("Performing backward chaining for hypothesis: "+hypothesis.getName());
+        provenList = new ArrayList<Fact>();
+        unprovenList = new ArrayList<Fact>();
         if(backwardChaining(hypothesis,1)){
             //System.out.println("Hypothesis proven true.");
             appendToOutputln("Hypothesis proven true.");
-            return true;
+            chainingData.setPositive(true);
         }else{
             //System.out.println("Hypothesis couldn't be proven true.");
             appendToOutputln("Hypothesis couldn't be proven true.");
-            return false;
+            chainingData.setPositive(false);
         }
+        chainingData.setProvenCount(provenList.size());
+        chainingData.setUnprovenCount(unprovenList.size());
+        return chainingData;
     }
     private boolean backwardChaining(Fact hypothesis, int depth){
+        for(Fact unproven : unprovenList){
+            if(unproven.equals(hypothesis))
+                return false;
+        }
         for(int i=0; i< knowledgeBase.size(); i++){
             if(knowledgeBase.getFactByIndex(i).equals(hypothesis))
+                return true;
+        }
+        for(Fact proven : provenList){
+            if(proven.equals(hypothesis))
                 return true;
         }
 
@@ -60,16 +78,16 @@ public class Engine {
                 }
                 if(isConditionTrue){
                     for(int i=0;i<depth;i++){
-                        System.out.print("-");
                         appendToOutput("-");
                     }
+                    provenList.add(hypothesis);
                     //System.out.print(hypothesis+" proven true by proving "+rule.getAntecedent()+".\n");
                     appendToOutputln(hypothesis+" proven true by proving "+rule.getAntecedent());
                     return true;
                 }
             }
         }
-
+        unprovenList.add(hypothesis);
         return false;
     }
 

@@ -130,4 +130,42 @@ public class ConvertedData {
                 "\n" +
                 "-numberOfLimpers=" + numberOfLimpers;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConvertedData that = (ConvertedData) o;
+
+        if (cardsSuited != that.cardsSuited) return false;
+        if (effectiveStackInBb != that.effectiveStackInBb) return false;
+        if (firstRaisePosition != that.firstRaisePosition) return false;
+        if (numberOfLimpers != that.numberOfLimpers) return false;
+        if (numberOfPlayers != that.numberOfPlayers) return false;
+        if (numberOfRaisers != that.numberOfRaisers) return false;
+        if (playerStackInBb != that.playerStackInBb) return false;
+        if (position != that.position) return false;
+        if (border != that.border) return false;
+        if (higherFigure != null ? !higherFigure.equals(that.higherFigure) : that.higherFigure != null) return false;
+        if (lowerFigure != null ? !lowerFigure.equals(that.lowerFigure) : that.lowerFigure != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = position;
+        result = 31 * result + firstRaisePosition;
+        result = 31 * result + playerStackInBb;
+        result = 31 * result + effectiveStackInBb;
+        result = 31 * result + (higherFigure != null ? higherFigure.hashCode() : 0);
+        result = 31 * result + (lowerFigure != null ? lowerFigure.hashCode() : 0);
+        result = 31 * result + (cardsSuited ? 1 : 0);
+        result = 31 * result + (border != null ? border.hashCode() : 0);
+        result = 31 * result + numberOfPlayers;
+        result = 31 * result + numberOfRaisers;
+        result = 31 * result + numberOfLimpers;
+        return result;
+    }
 }

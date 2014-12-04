@@ -74,7 +74,11 @@ public class KnowledgeBase {
 
     @Override
     public String toString() {
-        return "KnowledgeBase{" + facts +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder("KnowledgeBase:");
+        for(Fact fact : facts){
+            stringBuilder.append("\n-");
+            stringBuilder.append(fact.getName());
+        }
+        return stringBuilder.toString();
     }
 }

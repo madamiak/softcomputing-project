@@ -16,6 +16,14 @@ public class RuleGroup {
         this.name = name;
     }
 
+    public RuleGroup(RuleGroup ruleGroup){
+        this.name=ruleGroup.name;
+        this.rules = new ArrayList<Rule>();
+        for(Rule rule : ruleGroup.getRules()){
+            this.rules.add(new Rule(rule));
+        }
+    }
+
     public List<Rule> getRules() {
         return rules;
     }

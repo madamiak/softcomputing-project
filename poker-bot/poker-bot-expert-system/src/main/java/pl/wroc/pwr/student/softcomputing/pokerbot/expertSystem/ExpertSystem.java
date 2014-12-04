@@ -19,7 +19,7 @@ public class ExpertSystem {
         return new Engine(basicRules.getRules(),knowledgeBase);
     }
 
-    private KnowledgeBase getBasicKnowledgeBaseFromConverdedData(ConvertedData convertedData){
+    public KnowledgeBase getBasicKnowledgeBaseFromConverdedData(ConvertedData convertedData){
         List<Fact> facts = new ArrayList<Fact>();
         if(convertedData.getNumberOfLimpers()==0)facts.add(new Fact("No Limpers"));
         if(convertedData.getNumberOfLimpers()>0)facts.add(new Fact("One or more Limpers"));
@@ -39,7 +39,7 @@ public class ExpertSystem {
         return new KnowledgeBase(facts);
     }
 
-    private RuleGroup getBasicStrategyRuleGroup(){
+    public RuleGroup getBasicStrategyRuleGroup(){
 
         List<Rule> rules = new ArrayList<Rule>();
         List<Fact> conditions;

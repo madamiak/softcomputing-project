@@ -22,7 +22,7 @@ public class Fact implements Consequent {
 
         Fact fact = (Fact) o;
 
-        if (!name.equals(fact.name)) return false;
+        if (!name.toLowerCase().equals(fact.name.toLowerCase())) return false;
 
         return true;
     }

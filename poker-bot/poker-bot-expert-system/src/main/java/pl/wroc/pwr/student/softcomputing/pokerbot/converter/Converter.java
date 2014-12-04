@@ -20,6 +20,7 @@ public class Converter {
     private List<Integer> chipsAtTable;
     private List<Boolean> presentAtTable;
     private List<String> border;
+    private int fixedBigBlind = 0;
 
     public Converter(boolean isFoldButton, int dealerPosition, String firstCard, String secondCard, List<Integer> totalChips, List<Integer> chipsAtTable, List<String> border) {
         this.isFoldButton = isFoldButton;
@@ -35,6 +36,11 @@ public class Converter {
         if(this.secondCardFigure.equals("1"))this.secondCardFigure="T";
         presentAtTable = calculatePresentAtTable();
         numberOfPlayers = countNumberOfPlayers();
+    }
+
+    public Converter(boolean isFoldButton, int dealerPosition, String firstCard, String secondCard, List<Integer> totalChips, List<Integer> chipsAtTable, List<String> border, int fixedBigBlind) {
+        this(isFoldButton, dealerPosition, firstCard, secondCard, totalChips, chipsAtTable, border);
+        this.fixedBigBlind = fixedBigBlind;
     }
 
     private List<Boolean> calculatePresentAtTable() {
@@ -98,35 +104,48 @@ public class Converter {
     }
 
     private int calculateBigBlind(){
-        return chipsAtTable.get(getBigBlindPosition()-1);
+        return fixedBigBlind > 0 ? fixedBigBlind : chipsAtTable.get(getBigBlindPosition()-1);
     }
 
     private int calculateEffectiveStackInBb(){
-        int playerChips = totalChips.get(0);
-        int maxOpponentChips = 0;
-        int bbIndex = getBigBlindPosition()-1;
-        for(int i=1; i<6; i++){
-            if(totalChips.get(i)>maxOpponentChips&&i<=bbIndex)
-                maxOpponentChips=totalChips.get(i);
-            if(totalChips.get(i)>maxOpponentChips&&chipsAtTable.get(i)>0)
-                maxOpponentChips=totalChips.get(i);
-        }
-        System.out.println("player: "+playerChips);
-        System.out.println("maxOpponentChips: "+maxOpponentChips);
-        int effectiveStack = playerChips<maxOpponentChips ? playerChips : maxOpponentChips;
-        System.out.println("Effective stack: "+effectiveStack);
-        int effectiveStackInBB = effectiveStack/calculateBigBlind();
-        if(effectiveStack%calculateBigBlind()>(calculateBigBlind()/2))
+        int bigBlind = calculateBigBlind();
+        if(bigBlind==0)return -1;
+        int effectiveStack = calculateEffectiveStack();
+        int effectiveStackInBB = effectiveStack/bigBlind;
+        if(effectiveStack%bigBlind>(bigBlind/2))
             effectiveStackInBB++;
         return effectiveStackInBB;
     }
 
+    private int calculateEffectiveStack() {
+        int playerChips = getPlayerStack();
+        int maxOpponentChips = 0;
+        int maxTableChips = 1;
+        for(int i=1; i<6; i++){
+            if(i<getBigBlindPosition()){
+                if(totalChips.get(i)>maxOpponentChips)maxOpponentChips=totalChips.get(i);
+            }else{
+                if(chipsAtTable.get(i)>=maxTableChips){
+                    maxTableChips=chipsAtTable.get(i);
+                    if(totalChips.get(i)>maxOpponentChips)maxOpponentChips=totalChips.get(i);
+                }
+            }
+            //if(chipsAtTable.get(i)>=calculateBigBlind()/2&&totalChips.get(i)>maxOpponentChips)maxOpponentChips=totalChips.get(i);
+        }
+        return playerChips<maxOpponentChips ? playerChips : maxOpponentChips;
+    }
+
     private int calculatePlayerStackInBb(){
-        int stack = totalChips.get(0);
+        if(calculateBigBlind()==0)return -1;
+        int stack = getPlayerStack();
         int stackInBB = stack/calculateBigBlind();
         if(stack%calculateBigBlind()>(calculateBigBlind()/2))
             stackInBB++;
         return stackInBB;
+    }
+
+    private Integer getPlayerStack() {
+        return totalChips.get(0);
     }
 
     private boolean areCardsSuited(){
@@ -192,6 +211,7 @@ public class Converter {
         for(Integer tableChip : chipsAtTable){
             if(tableChip==bb)count++;
         }
+        if(chipsAtTable.get(getBigBlindPosition()-1)<calculateBigBlind())count++;
         return count;
     }
 
@@ -236,6 +256,26 @@ public class Converter {
         map.put("orange",Border.Regular);
         map.put("lime",Border.Regular);
         map.put("green",Border.Regular);
+        map.put("cyan",Border.Regular);
+        map.put("darkBlue",Border.Regular);
+        map.put("black",Border.Random);
+        map.put("white",Border.Regular);
+        map.put("blue",Border.Random);
+        map.put("red",Border.Random);
+        map.put("purple",Border.GoodLimper);
+        map.put("pink",Border.Random);
+        map.put("lightOrange",Border.Random);
+        map.put("gray",Border.WeakLimper);
+        return map;
+    }
+    /*OLD ONE
+    private Map<String, Border> getBorderMap(){
+        Map<String, Border> map = new HashMap<String, Border>();
+        map.put("noLabel",Border.Random);
+        map.put("yellow",Border.Random);
+        map.put("orange",Border.Regular);
+        map.put("lime",Border.Regular);
+        map.put("green",Border.Regular);
         map.put("cyan",Border.Random);
         map.put("darkBlue",Border.Regular);
         map.put("black",Border.Random);
@@ -248,5 +288,6 @@ public class Converter {
         map.put("gray",Border.WeakLimper);
         return map;
     }
+     */
 
 }

@@ -12,7 +12,11 @@ public class ExpertAPI {
     private ExpertAPI() {
     }
 
-    public static Engine getEngine(List<Rule> rules, KnowledgeBase knowledgeBase) {
+    public static Engine getEngine(List<RuleGroup> ruleGroups, KnowledgeBase knowledgeBase) {
+        List<Rule> rules = new ArrayList<Rule>();
+        for(RuleGroup ruleGroup : ruleGroups){
+            rules.addAll(ruleGroup.getRules());
+        }
         return new Engine(rules, knowledgeBase);
     }
 
