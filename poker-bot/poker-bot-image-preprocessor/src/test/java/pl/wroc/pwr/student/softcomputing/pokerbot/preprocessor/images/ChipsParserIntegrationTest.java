@@ -64,18 +64,31 @@ public class ChipsParserIntegrationTest {
 		System.out.println("Player: "+chips3);
 		assertEquals(values3[5],chips3);
 
-		System.out.println("Test on 11.png");
-		parser.loadTable("src/test/resources/Tournament/11.png");
-		int[] values4= {0,1240,435,0,745,350};
-		for (int j = 1; j <= 5; j++){
-			int chips4=testObject.parseChips(processor.convertToBlackAndWhite(parser.parseOpponentChips(j)));
-			System.out.println("Opponent "+j+": "+chips4);
-			assertEquals(values4[j-1],chips4);
-			
-		}
-		int chips4=testObject.parseChips(processor.convertToBlackAndWhite(parser.parsePlayerChips()));
-		System.out.println("Player: "+chips4);
-		assertEquals(values4[5],chips4);
+        System.out.println("Test on 11.png");
+        parser.loadTable("src/test/resources/Tournament/11.png");
+        int[] values4= {0,1240,435,0,745,350};
+        for (int j = 1; j <= 5; j++){
+            int chips4=testObject.parseChips(processor.convertToBlackAndWhite(parser.parseOpponentChips(j)));
+            System.out.println("Opponent "+j+": "+chips4);
+            assertEquals(values4[j-1],chips4);
+
+        }
+        int chips4=testObject.parseChips(processor.convertToBlackAndWhite(parser.parsePlayerChips()));
+        System.out.println("Player: "+chips4);
+        assertEquals(values4[5],chips4);
+
+        System.out.println("Test on 14.png");
+        parser.loadTable("src/test/resources/Tournament/14.png");
+        int[] values5= {0,1030,Integer.MAX_VALUE,0,0,1260};
+        for (int j = 1; j <= 5; j++){
+            int chips5=testObject.parseChips(processor.convertToBlackAndWhite(parser.parseOpponentChips(j)));
+            System.out.println("Opponent "+j+": "+chips5);
+            assertEquals(values5[j-1],chips5);
+
+        }
+        int chips5=testObject.parseChips(processor.convertToBlackAndWhite(parser.parsePlayerChips()));
+        System.out.println("Player: "+chips5);
+        assertEquals(values5[5],chips5);
 		
 	}
 
@@ -150,19 +163,58 @@ public class ChipsParserIntegrationTest {
 		int chips5=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
 		System.out.println("Player: "+chips5);
 		assertEquals(values5[5],chips5);
-		
-		System.out.println("Test on 13.png");
-		parser.loadTable("src/test/resources/Tournament/13.png");
-		int[] values6= {50,0,0,935,0,25};
-		for (int j = 1; j <= 5; j++){
-			int chips6=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parseOpponentTableChips(j)));
-			System.out.println("Opponent "+j+": "+chips6);
-			assertEquals(values6[j-1],chips6);
-			
-		}
-		int chips6=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
-		System.out.println("Player: "+chips6);
-		assertEquals(values6[5],chips6);
+
+        System.out.println("Test on 13.png");
+        parser.loadTable("src/test/resources/Tournament/13.png");
+        int[] values6= {50,0,0,935,0,25};
+        for (int j = 1; j <= 5; j++){
+            int chips6=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parseOpponentTableChips(j)));
+            System.out.println("Opponent "+j+": "+chips6);
+            assertEquals(values6[j-1],chips6);
+
+        }
+        int chips6=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
+        System.out.println("Player: "+chips6);
+        assertEquals(values6[5],chips6);
+
+        System.out.println("Test on 14.png");
+        parser.loadTable("src/test/resources/Tournament/14.png");
+        int[] values7= {0,0,390,0,0,200};
+        for (int j = 1; j <= 5; j++){
+            int chips7=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parseOpponentTableChips(j)));
+            System.out.println("Opponent "+j+": "+chips7);
+            assertEquals(values7[j-1],chips7);
+
+        }
+        int chips7=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
+        System.out.println("Player: "+chips7);
+        assertEquals(values7[5],chips7);
+
+        System.out.println("Test on Fold20.png");
+        parser.loadTable("src/test/resources/Tournament/Fold20.png");
+        int[] values8= {0,0,30,0,60,0};
+        for (int j = 1; j <= 5; j++){
+            int chips8=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parseOpponentTableChips(j)));
+            System.out.println("Opponent "+j+": "+chips8);
+            assertEquals(values8[j-1],chips8);
+
+        }
+        int chips8=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
+        System.out.println("Player: "+chips8);
+        assertEquals(values8[5],chips8);
+
+        System.out.println("Test on 18.png");
+        parser.loadTable("src/test/resources/Tournament/18.png");
+        int[] values9= {0,0,500,1125,0, 50};
+        for (int j = 1; j <= 5; j++){
+            int chips9=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parseOpponentTableChips(j)));
+            System.out.println("Opponent "+j+": "+chips9);
+            assertEquals(values9[j-1],chips9);
+
+        }
+        int chips9=testObject.parseTableChips(processor.convertToBlackAndWhite(parser.parsePlayerTableChips()));
+        System.out.println("Player: "+chips9);
+        assertEquals(values9[5],chips9);
 		
 	}
 	

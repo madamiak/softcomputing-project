@@ -30,21 +30,26 @@ public class BorderParserImpl implements BorderParser {
     public String parseBorder(BufferedImage image) {
         int x = image.getWidth();
         int y = image.getHeight();
-        int red = 0;
-        int green = 0;
-        int blue = 0;
-        int j=y/2;
-        for(int i=0; i<x; i++){
-            Color c = new Color(image.getRGB(i,j));
-            red += c.getRed();
-            green += c.getGreen();
-            blue += c.getBlue();
+
+        String colorName = "";
+        for(int j=0;j<y;j++){
+            int red = 0;
+            int green = 0;
+            int blue = 0;
+            for(int i=0; i<x; i++){
+                Color c = new Color(image.getRGB(i,j));
+                red += c.getRed();
+                green += c.getGreen();
+                blue += c.getBlue();
+            }
+            red = red/x;
+            green = green/x;
+            blue = blue/x;
+
+            colorName = getColorName(red, green, blue);
+            if(!colorName.equals("noLabel"))return colorName;
         }
-        red = red/x;
-        green = green/x;
-        blue = blue/x;
-        System.out.println("Color red:"+red+" green"+green+" blue:"+blue);
-        return getColorName(red, green, blue);
+        return colorName;
     }
 
     private String getColorName(int r, int g, int b){
@@ -63,7 +68,6 @@ public class BorderParserImpl implements BorderParser {
         if(areRGBsEqual(r, g, b,PINK))return "pink";
         if(areRGBsEqual(r, g, b,LIGHTORANGE))return "lightOrange";
         if(areRGBsEqual(r, g, b,GRAY))return "gray";
-        System.out.println("Color not found (read r:"+r+", g:"+g+", b:"+b+") returning noLabel...");
         return "noLabel";
     }
 

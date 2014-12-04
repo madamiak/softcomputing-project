@@ -36,7 +36,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 2.png");
         values = new String[]{"lime","orange","cyan","yellow","noLabel"};
@@ -46,7 +46,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 3.png");
         values = new String[]{"green","darkBlue","noLabel","black","white"};
@@ -56,7 +56,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 4.png");
         values = new String[]{"black","white","noLabel","darkBlue","green"};
@@ -66,7 +66,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 5.png");
         values = new String[]{"blue","red","noLabel","gray","purple"};
@@ -76,7 +76,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 6.png");
         values = new String[]{"purple","gray","noLabel","red","blue"};
@@ -86,7 +86,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 7.png");
         values = new String[]{"pink","lightOrange","noLabel","purple","gray"};
@@ -96,7 +96,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 8.png");
         values = new String[]{"yellow","white","noLabel","pink","lightOrange"};
@@ -106,7 +106,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 9.png");
         values = new String[]{"red","black","noLabel","blue","orange"};
@@ -116,7 +116,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 10.png");
         values = new String[]{"green","yellow","noLabel","lime","cyan"};
@@ -126,7 +126,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 11.png");
         values = new String[]{"white","lime","noLabel","lightOrange","noLabel"};
@@ -136,7 +136,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 12.png");
         values = new String[]{"noLabel","gray","noLabel","gray","noLabel"};
@@ -146,7 +146,7 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
         }
         System.out.println("Test on 13.png");
         values = new String[]{"noLabel","noLabel","noLabel","noLabel","noLabel"};
@@ -156,7 +156,27 @@ public class BorderParserImplTest {
             BufferedImage img = parser.parseOpponentBorder(i);
             String border=testObject.parseBorder(img);
             System.out.println("Opponent "+i+": "+border);
-            assertTrue(border.equals(values[i-1]));
+            assertEquals(border,values[i-1]);
+        }
+        System.out.println("Test on 14.png");
+        values = new String[]{"noLabel","noLabel","lime","noLabel","noLabel"};
+        for (int i = 1; i <= 5; i++)
+        {
+            parser.loadTable("src/test/resources/Borders/14.png");
+            BufferedImage img = parser.parseOpponentBorder(i);
+            String border=testObject.parseBorder(img);
+            System.out.println("Opponent "+i+": "+border);
+            assertEquals(border,values[i-1]);
+        }
+        System.out.println("Test on 15.png");
+        values = new String[]{"lime","lime","noLabel","noLabel","black"};
+        for (int i = 1; i <= 5; i++)
+        {
+            parser.loadTable("src/test/resources/Borders/15.png");
+            BufferedImage img = parser.parseOpponentBorder(i);
+            String border=testObject.parseBorder(img);
+            System.out.println("Opponent "+i+": "+border);
+            assertEquals(border,values[i-1]);
         }
     }
 }

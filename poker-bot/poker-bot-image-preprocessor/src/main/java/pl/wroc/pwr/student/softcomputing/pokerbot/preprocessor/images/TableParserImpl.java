@@ -1,6 +1,6 @@
 package pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.images;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import pl.wroc.pwr.student.softcomputing.pokerbot.preprocessor.api.ImageLoader;
@@ -12,10 +12,13 @@ public class TableParserImpl implements TableParser {
 	private ImageLoader imageLoader = new ImageFromFileLoader();
 	private ImageSplitter imageSplitter = new ImageFromBufferedImageSplitter();
 
+    private final int X_OFFSET = 1;
+    private final int Y_OFFSET = 3;
+
 	@Override
 	public void loadTable(String tableImageFile) {
 		table = imageLoader.load(tableImageFile);
-	}
+    }
 
 	@Override
 	public void loadTable(BufferedImage image) {
@@ -30,26 +33,34 @@ public class TableParserImpl implements TableParser {
 
 	@Override
 	public BufferedImage parseFirstCard() {
+        int xCardPosition = calculateXCardPosition();
+        int yCardPosition = calculateYCardPosition();
 		throwExceptionIfTableNotLoaded();
-		return imageSplitter.crop(table, 380, 386, 18, 19);
+		return imageSplitter.crop(table, xCardPosition, yCardPosition, 18, 19);
 	}
 
 	@Override
 	public BufferedImage parseSecondCard() {
+        int xCardPosition = calculateXCardPosition();
+        int yCardPosition = calculateYCardPosition();
 		throwExceptionIfTableNotLoaded();
-		return imageSplitter.crop(table, 437, 386, 18, 19);
+		return imageSplitter.crop(table, xCardPosition+57, yCardPosition, 18, 19);
 	}
 
 	@Override
 	public BufferedImage parseFirstSuit() {
+        int xCardPosition = calculateXCardPosition();
+        int yCardPosition = calculateYCardPosition();
 		throwExceptionIfTableNotLoaded();
-		return imageSplitter.crop(table, 381, 408, 17, 18);
+		return imageSplitter.crop(table, xCardPosition+1, yCardPosition+22, 17, 18);
 	}
 
 	@Override
 	public BufferedImage parseSecondSuit() {
+        int xCardPosition = calculateXCardPosition();
+        int yCardPosition = calculateYCardPosition();
 		throwExceptionIfTableNotLoaded();
-		return imageSplitter.crop(table, 438, 408, 17, 18);
+		return imageSplitter.crop(table, xCardPosition+58, yCardPosition+22, 17, 18);
 	}
 
 	@Override
@@ -130,11 +141,11 @@ public class TableParserImpl implements TableParser {
 			y=137;
 			break;
 		case 4:
-			x=489;
-			y=173;
+			x=495;
+			y=174;
 			break;
 		case 5:
-			x=505;
+			x=510;
 			y=310;
 			break;
 		}
@@ -150,7 +161,7 @@ public class TableParserImpl implements TableParser {
 	@Override
 	public BufferedImage parsePlayerTableChips() {
 		throwExceptionIfTableNotLoaded();
-		return imageSplitter.crop(table, 322, 342, 150, 14);
+		return imageSplitter.crop(table, 327, 342, 150, 14);
 	}
 
 	@Override
@@ -191,7 +202,7 @@ public class TableParserImpl implements TableParser {
 		switch(opponentNumber){
 		case 1:
 			x=55;
-			y=323;
+			y=324;
 			break;
 		case 2:
 			x=55;
@@ -207,10 +218,10 @@ public class TableParserImpl implements TableParser {
 			break;
 		case 5:
 			x=729;
-			y=323;
+			y=324;
 			break;
 		}
-		return imageSplitter.crop(table, x, y, 10, 3);
+		return imageSplitter.crop(table, x, y, 10, 2);
 	}
 
 	@Override
@@ -243,7 +254,13 @@ public class TableParserImpl implements TableParser {
 		return imageSplitter.crop(table, x, y, 75, 3);
 	}
 
-	private void throwExceptionIfTableNotLoaded() {
+    @Override
+    public BufferedImage parseTableCards() {
+        throwExceptionIfTableNotLoaded();
+        return imageSplitter.crop(table, 283, 208, 271, 22);
+    }
+
+    private void throwExceptionIfTableNotLoaded() {
 		if (table == null)
 			throw new NoTableLoadedException();
 	}
@@ -253,14 +270,35 @@ public class TableParserImpl implements TableParser {
 			throw new InvalidOpponentNumberException();
 	}
 
+    private int calculateYCardPosition(){
+        for(int i=375; i<=400; i++){
+            Color c = new Color(table.getRGB(400,i));
+            if(c.getRed()>250&&c.getGreen()>250&&c.getBlue()>250)return i+Y_OFFSET;
+        }
+        throw new CardNotFoundException();
+    }
+
+    private int calculateXCardPosition(){
+        for(int i=375; i<=400; i++){
+            Color c = new Color(table.getRGB(i,400));
+            if(c.getRed()>250&&c.getGreen()>250&&c.getBlue()>250)return i+X_OFFSET;
+        }
+        throw new CardNotFoundException();
+    }
+
 	private class NoTableLoadedException extends RuntimeException {
 		private static final long serialVersionUID = -2155329090680026978L;
 
 	}
 
-	private class InvalidOpponentNumberException extends RuntimeException {
-		private static final long serialVersionUID = -8384037090000641476L;
+    private class InvalidOpponentNumberException extends RuntimeException {
+        private static final long serialVersionUID = -8384037090000641476L;
 
-	}
+    }
+
+    private class CardNotFoundException extends RuntimeException {
+        private static final long serialVersionUID = -8384037090000641476L;
+
+    }
 
 }

@@ -12,11 +12,11 @@ public class FoldParserImpl implements FoldParser {
 		int sum = 0;
 		for (int i = 0; i < image.getWidth(); i++) {
 			for (int j = 0; j < image.getHeight(); j++) {
-				sum += image.getRGB(i, j)%10;
+				sum += image.getRGB(i, j)%1000;
 			}
 		}
 		int avg = sum/(image.getHeight() * image.getWidth());
-		return -3 == avg || -4 == avg;
+        return avg > -430;
 	}
 	
 	public class WrongImageSizeException extends RuntimeException {

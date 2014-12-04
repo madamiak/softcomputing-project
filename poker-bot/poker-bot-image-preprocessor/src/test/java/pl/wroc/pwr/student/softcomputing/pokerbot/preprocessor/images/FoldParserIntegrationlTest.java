@@ -21,18 +21,34 @@ public class FoldParserIntegrationlTest {
 
 	@Test
 	public void shouldReturnTrueWhenFoldButtonIsPresent() {
-		TableParser tableParser= new TableParserImpl();
+        TableParser tableParser= new TableParserImpl();
 		tableParser.loadTable("src/test/resources/Tournament/4.png");
 		BufferedImage image = tableParser.parseFoldButton();
 		assertTrue(foldParser.parseFoldButton(image));
+
+        tableParser.loadTable("src/test/resources/Tournament/5.png");
+        image = tableParser.parseFoldButton();
+        assertTrue(foldParser.parseFoldButton(image));
+
+        tableParser.loadTable("src/test/resources/Tournament/6.png");
+        image = tableParser.parseFoldButton();
+        assertTrue(foldParser.parseFoldButton(image));
 	}
-	@Ignore
+
 	@Test
 	public void shouldReturnFalseWhenFoldButtonIsNotPresent() {
-		TableParser tableParser= new TableParserImpl();
-		tableParser.loadTable("src/test/resources/Tournament/5.png");
+        TableParser tableParser= new TableParserImpl();
+		tableParser.loadTable("src/test/resources/Tournament/15.png");
 		BufferedImage image = tableParser.parseFoldButton();
 		assertFalse(foldParser.parseFoldButton(image));
+
+        tableParser.loadTable("src/test/resources/Tournament/16.png");
+        image = tableParser.parseFoldButton();
+        assertFalse(foldParser.parseFoldButton(image));
+
+        tableParser.loadTable("src/test/resources/Tournament/17.png");
+        image = tableParser.parseFoldButton();
+        assertFalse(foldParser.parseFoldButton(image));
 	}
 
 }

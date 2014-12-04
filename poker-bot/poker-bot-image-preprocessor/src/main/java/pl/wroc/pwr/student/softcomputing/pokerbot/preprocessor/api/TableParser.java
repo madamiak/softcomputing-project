@@ -107,15 +107,14 @@ public interface TableParser {
 	 */
 	BufferedImage parseOpponentBorder(int opponentNumber);
 
-	/**
-	 * @param opponentNumber
-	 *            index of opponent counting clockwise from player whose part
-	 *            should be parsed.
-	 * @return returns cropped image of table where players avatar should appear
-	 *         if he's still at the table.
-	 */
-	BufferedImage parseOpponentAppereanceAtTable(int opponentNumber);
+    /**
+     * @param opponentNumber
+     *            index of opponent counting clockwise from player whose part
+     *            should be parsed.
+     * @return returns cropped image of table where players avatar should appear
+     *         if he's still at the table.
+     */
+    BufferedImage parseOpponentAppereanceAtTable(int opponentNumber);
 
-	// TODO: Also need somehow to read Big Blind value from window frame (not in
-	// image)
+    BufferedImage parseTableCards();
 }

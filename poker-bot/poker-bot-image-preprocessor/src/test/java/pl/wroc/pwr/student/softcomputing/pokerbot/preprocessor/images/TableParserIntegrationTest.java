@@ -85,16 +85,28 @@ public class TableParserIntegrationTest
 	{
 		for (int i = 1; i <= 5; i++)
 		{
-			testObject.loadTable("src/test/resources/Tournament/4.png");
+			testObject.loadTable("src/test/resources/Tournament/14.png");
 			BufferedImage img = testObject.parseOpponentTableChips(i);
-			new ImageToFileSaver().save(img, "target/Opponent" + i + "TableChips4.png");
+			new ImageToFileSaver().save(img, "target/Opponent" + i + "TableChips14.png");
 		}
-		for (int i = 1; i <= 5; i++)
-		{
-			testObject.loadTable("src/test/resources/Tournament/5.png");
-			BufferedImage img = testObject.parseOpponentTableChips(i);
-			new ImageToFileSaver().save(img, "target/Opponent" + i + "TableChips5.png");
-		}
+        for (int i = 1; i <= 5; i++)
+        {
+            testObject.loadTable("src/test/resources/Tournament/4.png");
+            BufferedImage img = testObject.parseOpponentTableChips(i);
+            new ImageToFileSaver().save(img, "target/2Opponent" + i + "TableChips4.png");
+        }
+        for (int i = 1; i <= 5; i++)
+        {
+            testObject.loadTable("src/test/resources/Tournament/Fold20.png");
+            BufferedImage img = testObject.parseOpponentTableChips(i);
+            new ImageToFileSaver().save(img, "target/3Opponent" + i + "TableChips20.png");
+        }
+        for (int i = 1; i <= 5; i++)
+        {
+            testObject.loadTable("src/test/resources/Tournament/18.png");
+            BufferedImage img = testObject.parseOpponentTableChips(i);
+            new ImageToFileSaver().save(img, "target/18Opponent" + i + "TableChips18.png");
+        }
 	}
 
 	@Test
@@ -109,19 +121,19 @@ public class TableParserIntegrationTest
 	public void shouldCropOutPlayerTableChips()
 	{
 		testObject.loadTable("src/test/resources/Tournament/5.png");
-		BufferedImage img = testObject.parsePlayerChips();
+		BufferedImage img = testObject.parsePlayerTableChips();
 		new ImageToFileSaver().save(img, "target/PlayerTableChips.png");
 	}
 
 	@Test
 	public void shouldCropOutOpponentsCards()
 	{
-		for (int i = 1; i <= 5; i++)
-		{
-			testObject.loadTable("src/test/resources/Tournament/1.png");
-			BufferedImage img = testObject.parseOpponentCards(i);
-			new ImageToFileSaver().save(img, "target/Opponent" + i + "Cards.png");
-		}
+        for (int i = 1; i <= 5; i++)
+        {
+            testObject.loadTable("src/test/resources/Tournament/1.png");
+            BufferedImage img = testObject.parseOpponentCards(i);
+            new ImageToFileSaver().save(img, "target/Opponent" + i + "Cards.png");
+        }
 	}
 
 	@Test
@@ -129,7 +141,7 @@ public class TableParserIntegrationTest
 	{
 		for (int i = 1; i <= 5; i++)
 		{
-			testObject.loadTable("src/test/resources/Borders/1.png");
+			testObject.loadTable("src/test/resources/Borders/2.png");
 			BufferedImage img = testObject.parseOpponentBorder(i);
 			new ImageToFileSaver().save(img, "target/Opponent" + i + "Border.png");
 		}
@@ -146,4 +158,10 @@ public class TableParserIntegrationTest
 		}
 	}
 
+    @Test
+    public void shouldCroppOutTableCards() throws Exception {
+        testObject.loadTable("src/test/resources/Tournament/20.png");
+        BufferedImage img = testObject.parseTableCards();
+        new ImageToFileSaver().save(img, "target/TableCards.png");
+    }
 }

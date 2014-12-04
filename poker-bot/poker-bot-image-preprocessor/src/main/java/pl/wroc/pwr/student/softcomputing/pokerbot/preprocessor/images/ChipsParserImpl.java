@@ -22,7 +22,7 @@ public class ChipsParserImpl implements ChipsParser {
 	private final String _0_TABLE_KEY_VALUE = "69333595";
 	private final String _1_TABLE_KEY_VALUE = "22AB11";
 	private final String _2_TABLE_KEY_VALUE = "3466776";
-	private final String _3_TABLE_KEY_VALUE = "1445797";
+	private final String _3_TABLE_KEY_VALUE = "1345797";
 	private final String _4_TABLE_KEY_VALUE = "24334B21";
 	private final String _5_TABLE_KEY_VALUE = "754586";
 	private final String _6_TABLE_KEY_VALUE = "69554873";
@@ -45,7 +45,7 @@ public class ChipsParserImpl implements ChipsParser {
 			boolean numberFound=false;
 			for(int j=0; j<templateList.size();j++){
 				if(areSimilar(subKey, templateList.get(j))){
-					chipCount= chipCount+(j*(int)Math.pow(10,key.split("_").length-numberIndex));
+                    chipCount= chipCount+(j*(int)Math.pow(10,key.split("_").length-numberIndex));
 					numberIndex++;
 					numberFound=true;
 					break;
@@ -54,33 +54,32 @@ public class ChipsParserImpl implements ChipsParser {
 			if(!numberFound)noiseCount++;
 		}
 		chipCount=(int) (chipCount/Math.pow(10, noiseCount));
-		return chipCount;
+        return chipCount;
 	}
 	
 	@Override
 	public int parseTableChips(BufferedImage image) {
 		if(image.getType()!=BufferedImage.TYPE_BYTE_BINARY)throw new ImageNotBlackAndWhiteException();
 		if(image.getWidth()!=150 || image.getHeight()!=14)throw new WrongImageSizeException();
-		int chipCount=0;
+		long chipCount=0;
 		String key = calculateKey(0, image.getWidth(), image);
 		ArrayList<String> templateList = generateTableNumberTemplateArray();
 		int numberIndex=1;
 		int noiseCount=0;
-		
-		for(String subKey : key.split("_")){
+        for(String subKey : key.split("_")){
 			boolean numberFound=false;
 			for(int j=0; j<templateList.size();j++){
 				if(areSimilar(subKey, templateList.get(j))){
-					chipCount= chipCount+(j*(int)Math.pow(10,key.split("_").length-numberIndex));
-					numberIndex++;
+                    chipCount= chipCount+(j*(long)Math.pow(10,key.split("_").length-numberIndex));
+                    numberIndex++;
 					numberFound=true;
 					break;
 				}
 			}
 			if(!numberFound)noiseCount++;
 		}
-		chipCount=(int) (chipCount/Math.pow(10, noiseCount));
-		return chipCount;
+		chipCount=(long) (chipCount/Math.pow(10, noiseCount));
+		return (int)chipCount;
 	}
 	
 	private boolean areSimilar(String a, String b){
@@ -101,7 +100,8 @@ public class ChipsParserImpl implements ChipsParser {
 			if(a.charAt(i)==b.charAt(i))similar++;
 		}
 		similar=similar/a.length();
-		if(similar>SIMILARITY) return true;
+        //System.out.println("Similarity "+a+" "+b+" :"+similar);
+        if(similar>SIMILARITY) return true;
 		else return false;
 	}
 	
